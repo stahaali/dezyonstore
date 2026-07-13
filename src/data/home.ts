@@ -101,10 +101,10 @@ export const quickCategories = [
 
 export const secondaryNav = [
   { label: "Home", href: "/#homebanner", hasDropdown: false },
-  { label: "Laptops", href: "/#laptops", hasDropdown: false },
-  { label: "Desktops", href: "/#desktops", hasDropdown: false },
-  { label: "Servers", href: "/#servers", hasDropdown: false },
-  { label: "Gaming Pc", href: "/#gaming-pc", hasDropdown: false },
-  { label: "Monitors", href: "/#monitors", hasDropdown: false },
-  { label: "Peripherals", href: "/#peripherals", hasDropdown: false },
+  { label: "Laptops", href: "/categories/laptops", hasDropdown: false },
+  { label: "Desktops", href: "/categories/desktop-pcs", hasDropdown: false },
+  { label: "Servers", href: "/categories/servers", hasDropdown: false },
+  { label: "Gaming Pc", href: "/categories/gaming-pcs", hasDropdown: false },
+  { label: "Monitors", href: "/categories/monitors", hasDropdown: false },
+  { label: "Peripherals", href: "/categories/peripherals", hasDropdown: false },
 ];

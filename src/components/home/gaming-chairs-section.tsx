@@ -26,7 +26,7 @@ export function GamingChairsSection({ products }: GamingChairsSectionProps) {
             </p>
           </div>
           <Link
-            href="/categories/gaming"
+            href="/categories/gaming-pcs"
             className="shrink-0 rounded-full bg-[#ffc107] px-5 py-2 text-sm font-bold text-gray-900 transition-colors hover:bg-[#e6ad00]"
           >
             View All
@@ -35,7 +35,7 @@ export function GamingChairsSection({ products }: GamingChairsSectionProps) {
 
         <div className="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[300px_minmax(0,1fr)]">
           <Link
-            href="/categories/gaming"
+            href="/categories/gaming-pcs"
             className="group relative mx-auto block w-full max-w-[300px] overflow-hidden rounded-2xl bg-white lg:mx-0 lg:h-full lg:max-w-none"
           >
             <div className="relative aspect-[4/5] w-full lg:absolute lg:inset-0 lg:aspect-auto">

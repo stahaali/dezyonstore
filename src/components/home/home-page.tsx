@@ -79,7 +79,7 @@ export function HomePage() {
         title="Peripherals"
         subtitle="Keyboards, mice, headsets and more for gamers"
         products={gamingAccessoriesHome}
-        viewAllHref="/categories/accessories"
+        viewAllHref="/categories/peripherals"
       />
 
       <AnnouncementTicker />
