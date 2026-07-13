@@ -1,0 +1,29 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.logo:hover {
+  opacity: 0.85;
+}
+
+.image {
+  width: auto;
+  height: 5rem;
+}
+
+.footerLogo .image {
+  height: 4.25rem;
+}
+
+@media (max-width: 640px) {
+  .image {
+    height: 3.75rem;
+  }
+
+  .footerLogo .image {
+    height: 3.25rem;
+  }
+}

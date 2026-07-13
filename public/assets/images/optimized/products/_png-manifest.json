@@ -1,0 +1,21 @@
+{
+  "laptops": [
+    "/assets/images/optimized/products/laptops/asus-vivobook-v2.png",
+    "/assets/images/optimized/products/laptops/kaigerr-gaming-v2.png",
+    "/assets/images/optimized/products/laptops/acer-aspire-v2.png",
+    "/assets/images/optimized/products/laptops/lenovo-business-v2.png",
+    "/assets/images/optimized/products/laptops/niakun-pro-v2.png",
+    "/assets/images/optimized/products/laptops/asus-vivobook.png",
+    "/assets/images/optimized/products/laptops/kaigerr-gaming.png",
+    "/assets/images/optimized/products/laptops/acer-aspire.png",
+    "/assets/images/optimized/products/laptops/lenovo-business.png",
+    "/assets/images/optimized/products/laptops/niakun-pro.png"
+  ],
+  "desktops": [
+    "/assets/images/optimized/products/desktops/desktop-01.png",
+    "/assets/images/optimized/products/desktops/desktop-02.png",
+    "/assets/images/optimized/products/desktops/desktop-03.png",
+    "/assets/images/optimized/products/desktops/desktop-04.png",
+    "/assets/images/optimized/products/desktops/desktop-05.png"
+  ]
+}

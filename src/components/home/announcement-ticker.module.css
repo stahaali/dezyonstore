@@ -1,0 +1,11 @@
+.ticker {
+  overflow: hidden;
+}
+
+.ticker :global(.swiper-wrapper) {
+  transition-timing-function: linear !important;
+}
+
+.ticker :global(.swiper-slide) {
+  width: auto !important;
+}

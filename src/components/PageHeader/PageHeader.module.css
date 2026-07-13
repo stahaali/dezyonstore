@@ -1,0 +1,57 @@
+.pageHeader {
+  padding: 5rem 1.5rem 3rem;
+  background: #000;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.pageHeader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 80% at 50% -20%, rgba(var(--accent-rgb), 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.pageHeaderInner {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.description {
+  margin-top: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 600px;
+}
+
+.content {
+  padding: 4rem 0 5rem;
+  background: #000;
+}
+
+.contentInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
