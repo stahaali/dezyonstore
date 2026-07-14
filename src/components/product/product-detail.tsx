@@ -22,11 +22,7 @@ import { useWishlistStore } from "@/store/wishlist-store";
 import { useCurrencyStore } from "@/store/currency-store";
 import { formatPriceDollar } from "@/lib/format-price";
 import { cn } from "@/lib/utils";
-import {
-  alertAddedToCart,
-  alertAlreadyInCart,
-  alertOutOfStock,
-} from "@/lib/cart-alerts";
+import { alertAddedToCart, alertAlreadyInCart } from "@/lib/cart-alerts";
 import { siteLogo } from "@/data/site-assets";
 import { useHasMounted } from "@/hooks/use-has-mounted";
 import { useRequireLoginForCart } from "@/hooks/use-require-login-for-cart";
@@ -103,10 +99,6 @@ export function ProductDetailView({ product, categoryName }: Props) {
   }
 
   async function handleAddToCart() {
-    if (!product.inStock) {
-      void alertOutOfStock();
-      return;
-    }
     const ok = await ensureLoggedIn({
       productId: product.id,
       quantity: qty,
@@ -121,10 +113,6 @@ export function ProductDetailView({ product, categoryName }: Props) {
   }
 
   async function handleBuyNow() {
-    if (!product.inStock) {
-      void alertOutOfStock();
-      return;
-    }
     const ok = await ensureLoggedIn({
       productId: product.id,
       quantity: qty,
@@ -289,27 +277,15 @@ export function ProductDetailView({ product, categoryName }: Props) {
           <div className="mt-3 flex flex-col gap-2 sm:max-w-md">
             <button
               type="button"
-              disabled={!product.inStock}
               onClick={handleAddToCart}
-              className={cn(
-                "w-full cursor-pointer rounded-md py-3 text-sm font-bold uppercase tracking-wide text-white",
-                product.inStock
-                  ? "bg-[#0c2340] hover:bg-[#0a1c33]"
-                  : "cursor-not-allowed bg-gray-400",
-              )}
+              className="w-full cursor-pointer rounded-md bg-[#0c2340] py-3 text-sm font-bold uppercase tracking-wide text-white hover:bg-[#0a1c33]"
             >
               Add To Cart
             </button>
             <button
               type="button"
-              disabled={!product.inStock}
               onClick={handleBuyNow}
-              className={cn(
-                "w-full cursor-pointer rounded-md py-3 text-sm font-bold uppercase tracking-wide",
-                product.inStock
-                  ? "bg-[#ffc107] text-gray-900 hover:bg-[#ffb300]"
-                  : "cursor-not-allowed bg-gray-300 text-gray-500",
-              )}
+              className="w-full cursor-pointer rounded-md bg-[#ffc107] py-3 text-sm font-bold uppercase tracking-wide text-gray-900 hover:bg-[#ffb300]"
             >
               Buy It Now
             </button>

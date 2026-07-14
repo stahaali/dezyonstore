@@ -23,7 +23,7 @@ export function HeroBanners() {
           <div className="absolute inset-y-0 left-0 flex w-full max-w-[92%] flex-col justify-center px-6 sm:max-w-[78%] md:max-w-[58%] md:px-10 lg:max-w-[52%] lg:px-14">
             <div className="relative max-w-xl">
               <div
-                className="pointer-events-none absolute -inset-3 rounded-2xl bg-white/20 md:-inset-4"
+                className="pointer-events-none absolute -inset-3 rounded-2xl bg-white/45 md:-inset-4"
                 aria-hidden="true"
               />
               <div className="relative">
@@ -37,7 +37,7 @@ export function HeroBanners() {
                   <span className="mt-1 block text-[#c8102e]">Every Match</span>
                 </h2>
 
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-gray-800 md:mt-5 md:text-base">
+                <p className="mt-4 max-w-md rounded-lg bg-white/70 px-3 py-2 text-sm font-medium leading-relaxed text-gray-900 md:mt-5 md:text-base">
                   Premium Razer mice, keyboards, headsets and fight-ready gear —
                   built for speed, precision, and tournament-level play.
                 </p>

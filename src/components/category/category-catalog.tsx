@@ -13,9 +13,11 @@ interface CategoryCatalogProps {
   products: Product[];
   /** When true (e.g. Razer), show product-type options under Category */
   showTypeFilters?: boolean;
+  /** Gaming Accessories: Category section shows type options (Controller, Chair, …) */
+  showPeripheralCategoryFilters?: boolean;
   /** Peripherals page: Brand section shows type categories instead of brands */
   brandAsCategories?: boolean;
-  /** Hide these Brand category options (e.g. Gaming Accessories: Mouse, Webcam) */
+  /** Hide these Brand / category type options */
   hideBrandCategories?: string[];
   /** Hide Brand filter section (e.g. Razer Accessories — all same brand) */
   hideBrandFilter?: boolean;
@@ -28,6 +30,10 @@ const PERIPHERAL_CATEGORIES = [
   "Gaming Mouse",
   "Webcam",
   "Mouse Pad",
+  "Controller",
+  "Chair",
+  "Desk",
+  "Console",
 ] as const;
 
 type PeripheralCategory = (typeof PERIPHERAL_CATEGORIES)[number];
@@ -57,7 +63,12 @@ export function getProductType(product: Product): string {
   ) {
     return "Mouse";
   }
-  if (/\b(mouse|mice|mx master)\b/.test(t) && !/\bcombo\b/.test(t)) {
+  if (
+    /\b(mouse|mice|mx master|magic mouse|optical mouse|trackball|air mouse)\b/.test(
+      t,
+    ) &&
+    !/\bcombo\b/.test(t)
+  ) {
     return "Mouse";
   }
   if (
@@ -94,34 +105,73 @@ export function getPeripheralCategory(product: Product): PeripheralCategory | "O
   const t =
     `${product.name} ${product.slug} ${product.shortDescription}`.toLowerCase();
 
+  if (
+    /\b(gaming chair|office gaming chair|dxracer|andaseat|arozzi|recliner)\b/.test(
+      t,
+    ) ||
+    (/\bchair\b/.test(t) && /\b(gaming|ergonomic)\b/.test(t))
+  ) {
+    return "Chair";
+  }
+  if (
+    /\b(gaming desk|sit-stand desk|standing desk|electric desk|l-shaped)\b/.test(
+      t,
+    ) ||
+    (/\bdesk\b/.test(t) && /\b(gaming|motorized|rgb)\b/.test(t))
+  ) {
+    return "Desk";
+  }
+  if (
+    /\b(nintendo switch|gaming console|steam deck|switch lite|switch oled|playstation|xbox series)\b/.test(
+      t,
+    )
+  ) {
+    return "Console";
+  }
+  if (
+    /\b(gamepad|controller|joystick|racing wheel|steering wheel|fight stick|arcade|dualsense|dualshock|8bitdo|pxn|easysmx)\b/.test(
+      t,
+    )
+  ) {
+    return "Controller";
+  }
   if (/\b(mouse\s*pad|desk mat|mm700|pluto|mp-75)\b/.test(t)) {
     return "Mouse Pad";
   }
-  if (/\b(webcam|c920|brio|camera)\b/.test(t)) {
+  if (
+    /\b(webcam|web\s*cam|c920|c270|c922|c925|brio|streamcam|pk-810|pk-910|pk-925|pk-980|camera)\b/.test(
+      t,
+    )
+  ) {
     return "Webcam";
   }
   if (
-    /\b(gaming\s*mouse|deathadder|viper|basilisk|orochi|cobra|katar|g502|g203|bloody\s*v8|m930)\b/.test(
+    /\b(gaming\s*mouse|deathadder|viper|basilisk|orochi|cobra|katar|g502|g203|g pro|bloody\s*v8|m930|aerox|rival|pulsefire|model\s*[od]|attack\s*shark|glorious|eweadn|prime wireless|saber)\b/.test(
       t,
     )
   ) {
     return "Gaming Mouse";
   }
   if (
-    /\b(headset|headphone|kraken|blackshark|cloud|stinger|arctis|headphones)\b/.test(
+    /\b(headset|headphone|headphones|earphones|earbuds?|buds|soundcore|kraken|blackshark|cloud|stinger|arctis|bowie|evolve)\b/.test(
       t,
     )
   ) {
     return "Headphone";
   }
   if (
-    /\b(keyboard|blackwidow|huntsman|ornata|kumara|g213|pop keys|mx keys|g613|k70|vajra|fstyler|mk220)\b/.test(
+    /\b(keyboard|keyboards|blackwidow|huntsman|ornata|kumara|g213|pop keys|mx keys|g613|k70|vajra|fstyler|mk220|mk235|mk240|mk275|mk345|apex|pebble|pro x tkl|aula|a4tech|a4 tech|madlions|k120|kr-85)\b/.test(
       t,
     )
   ) {
     return "Keyboard";
   }
-  if (/\b(mouse|mice|mx master)\b/.test(t) && !/\bcombo\b/.test(t)) {
+  if (
+    /\b(mouse|mice|mx master|magic mouse|optical mouse|trackball|air mouse)\b/.test(
+      t,
+    ) &&
+    !/\bcombo\b/.test(t)
+  ) {
     return "Mouse";
   }
   if (/\bcombo\b/.test(t)) {
@@ -210,6 +260,7 @@ export function CategoryCatalog({
   categoryName,
   products,
   showTypeFilters = false,
+  showPeripheralCategoryFilters = false,
   brandAsCategories = false,
   hideBrandCategories = [],
   hideBrandFilter = false,
@@ -221,7 +272,12 @@ export function CategoryCatalog({
     [products, hideBrandCategories],
   );
   const useTypes = showTypeFilters && typeFacets.length > 0;
+  const usePeripheralCategories =
+    showPeripheralCategoryFilters && peripheralFacets.some((f) => f.count > 0);
   const brandSectionFacets = brandAsCategories ? peripheralFacets : brandFacets;
+  const categorySectionFacets = usePeripheralCategories
+    ? peripheralFacets.filter((f) => f.count > 0)
+    : typeFacets;
 
   const inStockCount = products.filter((p) => p.inStock).length;
   const outStockCount = products.length - inStockCount;
@@ -233,6 +289,7 @@ export function CategoryCatalog({
   });
 
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [availability, setAvailability] = useState<{
     inStock: boolean;
@@ -247,6 +304,12 @@ export function CategoryCatalog({
     );
   }
 
+  function toggleCategory(name: string) {
+    setSelectedCategories((prev) =>
+      prev.includes(name) ? prev.filter((c) => c !== name) : [...prev, name],
+    );
+  }
+
   function toggleBrand(name: string) {
     setSelectedBrands((prev) =>
       prev.includes(name) ? prev.filter((b) => b !== name) : [...prev, name],
@@ -255,6 +318,7 @@ export function CategoryCatalog({
 
   function clearFilters() {
     setSelectedTypes([]);
+    setSelectedCategories([]);
     setSelectedBrands([]);
     setAvailability({ inStock: false, outOfStock: false });
   }
@@ -264,6 +328,12 @@ export function CategoryCatalog({
       if (
         selectedTypes.length > 0 &&
         !selectedTypes.includes(getProductType(p))
+      ) {
+        return false;
+      }
+      if (
+        selectedCategories.length > 0 &&
+        !selectedCategories.includes(getPeripheralCategory(p))
       ) {
         return false;
       }
@@ -282,7 +352,14 @@ export function CategoryCatalog({
       }
       return true;
     });
-  }, [products, selectedTypes, selectedBrands, availability, brandAsCategories]);
+  }, [
+    products,
+    selectedTypes,
+    selectedCategories,
+    selectedBrands,
+    availability,
+    brandAsCategories,
+  ]);
 
   const sidebar = (
     <aside className="overflow-hidden rounded-xl border border-gray-200 bg-[#f2f2f2]">
@@ -291,9 +368,27 @@ export function CategoryCatalog({
         open={open.category}
         onToggle={() => setOpen((s) => ({ ...s, category: !s.category }))}
       >
-        {useTypes ? (
+        {usePeripheralCategories ? (
           <ul className="space-y-2.5">
-            {typeFacets.map((type) => (
+            {categorySectionFacets.map((item) => (
+              <li key={item.name}>
+                <label className="flex cursor-pointer items-center gap-2.5 text-sm text-gray-800">
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories.includes(item.name)}
+                    onChange={() => toggleCategory(item.name)}
+                    className="h-4 w-4 rounded border-gray-400 accent-gray-900"
+                  />
+                  <span>
+                    {item.name} ({item.count})
+                  </span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        ) : useTypes ? (
+          <ul className="space-y-2.5">
+            {categorySectionFacets.map((type) => (
               <li key={type.name}>
                 <label className="flex cursor-pointer items-center gap-2.5 text-sm text-gray-800">
                   <input

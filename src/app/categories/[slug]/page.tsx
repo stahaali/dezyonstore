@@ -78,11 +78,11 @@ export default async function CategoryPage({ params }: PageProps) {
             categoryName={category.name}
             products={items}
             showTypeFilters={slug === "razer-products"}
-            brandAsCategories={
-              slug === "peripherals" || slug === "gaming-accessories"
-            }
+            brandAsCategories={slug === "peripherals"}
             hideBrandCategories={
-              slug === "gaming-accessories" ? ["Mouse", "Webcam"] : []
+              slug === "peripherals"
+                ? ["Chair", "Desk", "Console", "Controller"]
+                : []
             }
             hideBrandFilter={slug === "razer-products"}
           />

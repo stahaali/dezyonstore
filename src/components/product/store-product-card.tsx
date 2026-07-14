@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
@@ -26,9 +27,14 @@ export function StoreProductCard({ product, className }: StoreProductCardProps) 
   const discount = calcDiscount(product.price, product.compareAtPrice);
   const inCart = mounted && inCartRaw;
   const { ensureLoggedIn } = useRequireLoginForCart();
+  const [imgSrc, setImgSrc] = useState(product.images[0]?.url ?? siteLogo);
+
+  const productImage = product.images[0]?.url ?? siteLogo;
+  useEffect(() => {
+    setImgSrc(productImage);
+  }, [product.id, productImage]);
 
   async function handleAddToCart() {
-    if (!product.inStock) return;
     const ok = await ensureLoggedIn({ productId: product.id, quantity: 1 });
     if (!ok) return;
     const result = addToCart(product);
@@ -43,7 +49,7 @@ export function StoreProductCard({ product, className }: StoreProductCardProps) 
     <article className={cn("flex h-full flex-col bg-transparent", className)}>
       <Link
         href={`/products/${product.slug}`}
-        className="group/image relative block h-[170px] w-full overflow-hidden rounded-md bg-white sm:h-[190px] md:h-[200px]"
+        className="group/image relative block h-[170px] w-full overflow-hidden rounded-md bg-[#f0f1f3] sm:h-[190px] md:h-[200px]"
       >
         {discount > 0 || product.isNew ? (
           <div className="absolute left-0 top-0 z-10 flex flex-col gap-1">
@@ -60,11 +66,14 @@ export function StoreProductCard({ product, className }: StoreProductCardProps) 
           </div>
         ) : null}
         <Image
-          src={product.images[0]?.url ?? siteLogo}
+          src={imgSrc}
           alt={product.name}
           fill
           sizes="(max-width: 640px) 45vw, 20vw"
           className="object-contain object-center p-3 transition-transform duration-300 group-hover/image:scale-[1.03]"
+          onError={() => {
+            if (imgSrc !== siteLogo) setImgSrc(siteLogo);
+          }}
         />
       </Link>
 
@@ -106,20 +115,10 @@ export function StoreProductCard({ product, className }: StoreProductCardProps) 
 
         <button
           type="button"
-          disabled={!product.inStock}
           onClick={handleAddToCart}
-          className={cn(
-            "mt-auto flex h-10 w-full shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white transition-colors",
-            product.inStock
-              ? "cursor-pointer bg-[#0c2340] hover:bg-[#0a1c33]"
-              : "cursor-not-allowed bg-gray-400",
-          )}
+          className="mt-auto flex h-10 w-full shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#0c2340] text-sm font-semibold text-white transition-colors hover:bg-[#0a1c33]"
         >
-          {!product.inStock
-            ? "Out Of Stock"
-            : inCart
-              ? "In Cart"
-              : "Add To Cart"}
+          {inCart ? "In Cart" : "Add To Cart"}
         </button>
       </div>
     </article>
