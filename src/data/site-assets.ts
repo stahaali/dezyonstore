@@ -3,7 +3,7 @@ import manifest from "./site-assets.json";
 export const categoryImages = manifest.categories;
 export const bannerImages = manifest.banners;
 export const productImages = manifest.products;
-export const siteLogo = manifest.logo || "/assets/images/optimized/dezyon-logo010.webp";
+export const siteLogo = manifest.logo || "/assets/images/optimized/logo2.webp";
 
 /** Skip early logo assets in the product list */
 const PRODUCT_OFFSET = 30;

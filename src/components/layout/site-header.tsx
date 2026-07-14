@@ -90,9 +90,9 @@ export function SiteHeader() {
             <Image
               src={siteLogo}
               alt="Dezyon Store"
-              width={280}
-              height={80}
-              className="h-14 w-auto md:h-16"
+              width={340}
+              height={96}
+              className="h-16 w-auto md:h-20"
               priority
             />
           </Link>
