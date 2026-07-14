@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import { useState } from "react";
 import { CartSidebar } from "@/components/cart/cart-sidebar";
+import { PendingCartResume } from "@/components/cart/pending-cart-resume";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(
@@ -21,6 +22,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <NextThemesProvider attribute="class" defaultTheme="light" enableSystem>
         {children}
         <CartSidebar />
+        <PendingCartResume />
         <Toaster position="top-right" richColors closeButton />
       </NextThemesProvider>
     </QueryClientProvider>

@@ -1,7 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Product } from "@/types";
-import { bannerImages } from "@/data/site-assets";
 import { StoreProductCard } from "@/components/product/store-product-card";
 
 interface GamingChairsSectionProps {
@@ -33,27 +31,10 @@ export function GamingChairsSection({ products }: GamingChairsSectionProps) {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[300px_minmax(0,1fr)]">
-          <Link
-            href="/categories/gaming-pcs"
-            className="group relative mx-auto block w-full max-w-[300px] overflow-hidden rounded-2xl bg-white lg:mx-0 lg:h-full lg:max-w-none"
-          >
-            <div className="relative aspect-[4/5] w-full lg:absolute lg:inset-0 lg:aspect-auto">
-              <Image
-                src={bannerImages["gaming-chair"]}
-                alt="Shop Gaming PCs"
-                fill
-                className="border-0 object-cover object-center outline-none transition-transform duration-500 group-hover:scale-[1.03]"
-                sizes="300px"
-              />
-            </div>
-          </Link>
-
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {products.slice(0, 4).map((product) => (
-              <StoreProductCard key={product.id} product={product} />
-            ))}
-          </div>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {products.slice(0, 4).map((product) => (
+            <StoreProductCard key={product.id} product={product} />
+          ))}
         </div>
       </div>
     </section>

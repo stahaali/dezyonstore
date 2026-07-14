@@ -9,7 +9,7 @@ const productLinks = [
   { label: "Gaming Consoles", href: "/categories/gaming" },
   { label: "Graphic Cards", href: "/categories/graphic-cards" },
   { label: "Hard Drives", href: "/categories/hard-drives" },
-  { label: "LCD/LED Monitors", href: "/categories/monitors" },
+  { label: "Gaming Accessories", href: "/categories/gaming-accessories" },
 ];
 
 const accountLinks = [

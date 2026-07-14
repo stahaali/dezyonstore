@@ -15,7 +15,7 @@ import {
   serversHome,
   gamingAccessoriesHome,
   gamingChairsHome,
-  monitorProductsHome,
+  gamingAccessoriesNavHome,
 } from "@/data/products";
 
 function scrollToHash(hash: string) {
@@ -67,11 +67,11 @@ export function HomePage() {
       <GamingChairsSection products={gamingChairsHome} />
 
       <BrandCarouselSection
-        id="monitors"
-        title="Monitors"
-        subtitle="Simply Stunning. Engineered for Perfection."
-        products={monitorProductsHome}
-        viewAllHref="/categories/monitors"
+        id="gaming-accessories"
+        title="Gaming Accessories"
+        subtitle="Mice, keyboards, headsets & gear — inspired by CZone."
+        products={gamingAccessoriesNavHome}
+        viewAllHref="/categories/gaming-accessories"
       />
 
       <CategoryCarouselSection

@@ -62,10 +62,10 @@ export const quickCategories = [
     image: categoryImages.cooling,
   },
   {
-    id: "monitors",
-    name: "Monitors",
-    slug: "monitors",
-    image: categoryImages.laptops,
+    id: "gaming-accessories",
+    name: "Gaming Accessories",
+    slug: "gaming-accessories",
+    image: categoryImages.keyboards,
   },
   {
     id: "mouse",
@@ -105,6 +105,6 @@ export const secondaryNav = [
   { label: "Desktops", href: "/categories/desktop-pcs", hasDropdown: false },
   { label: "Servers", href: "/categories/servers", hasDropdown: false },
   { label: "Gaming Pc", href: "/categories/gaming-pcs", hasDropdown: false },
-  { label: "Monitors", href: "/categories/monitors", hasDropdown: false },
+  { label: "Gaming Accessories", href: "/categories/gaming-accessories", hasDropdown: false },
   { label: "Peripherals", href: "/categories/peripherals", hasDropdown: false },
 ];

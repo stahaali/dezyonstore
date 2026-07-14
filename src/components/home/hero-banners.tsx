@@ -21,13 +21,13 @@ const heroSlides = [
     image: bannerImages["hero-headphones"] ?? bannerImages["hero-model"],
   },
   {
-    id: "monitors",
-    overline: "See Every Detail",
-    title: "Stunning Displays for Work & Play",
+    id: "gaming-accessories",
+    overline: "Level Up Your Rig",
+    title: "Gaming Accessories That Win",
     description:
-      "From gaming to professional editing — find monitors with vibrant color and smooth refresh rates.",
-    cta: "Shop Monitors",
-    href: "/categories/monitors",
+      "Keyboards, mice, headsets and more — gear up like the pros with CZone-inspired gaming accessories.",
+    cta: "Shop Accessories",
+    href: "/categories/gaming-accessories",
     image: bannerImages["hero-monitors"] ?? bannerImages.main,
   },
   {

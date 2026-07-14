@@ -3,6 +3,8 @@
 import { FormEvent, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { invalidateAuthCache } from "@/hooks/use-auth-user";
+import { safeReturnPath } from "@/lib/pending-cart";
 
 type Panel = "user" | "admin";
 
@@ -11,6 +13,7 @@ export default function LoginPage() {
   const searchParams = useSearchParams();
   const initialPanel: Panel =
     searchParams.get("panel") === "admin" ? "admin" : "user";
+  const nextPath = safeReturnPath(searchParams.get("next"));
 
   const [panel, setPanel] = useState<Panel>(initialPanel);
   const [error, setError] = useState<string | null>(null);
@@ -26,10 +29,12 @@ export default function LoginPage() {
           }
         : {
             heading: "Customer login",
-            sub: "Sign in to your Dezyon account to track orders and manage your profile.",
+            sub: nextPath
+              ? "Sign in to continue adding items to your cart."
+              : "Sign in to your Dezyon account to track orders and manage your profile.",
             cta: "Sign in",
           },
-    [panel],
+    [panel, nextPath],
   );
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -52,7 +57,12 @@ export default function LoginPage() {
       if (!res.ok || !data.ok) {
         throw new Error(data.error || "Login failed");
       }
-      router.push(data.redirectTo || (panel === "admin" ? "/admin/orders" : "/account"));
+      invalidateAuthCache();
+      const fallback =
+        data.redirectTo || (panel === "admin" ? "/admin/orders" : "/account");
+      router.push(
+        panel === "admin" ? fallback : nextPath || fallback,
+      );
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
@@ -153,7 +163,10 @@ export default function LoginPage() {
           {panel === "user" ? (
             <p className="mt-4 text-center text-sm text-gray-600">
               New customer?{" "}
-              <Link href="/register" className="font-semibold text-[#00498e] hover:underline">
+              <Link
+                href={`/register${nextPath ? `?next=${encodeURIComponent(nextPath)}` : ""}`}
+                className="font-semibold text-[#00498e] hover:underline"
+              >
                 Create an account
               </Link>
             </p>

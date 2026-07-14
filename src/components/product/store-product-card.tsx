@@ -11,6 +11,7 @@ import { useCurrencyStore } from "@/store/currency-store";
 import { siteLogo } from "@/data/site-assets";
 import { alertAddedToCart, alertAlreadyInCart } from "@/lib/cart-alerts";
 import { useHasMounted } from "@/hooks/use-has-mounted";
+import { useRequireLoginForCart } from "@/hooks/use-require-login-for-cart";
 
 interface StoreProductCardProps {
   product: Product;
@@ -24,9 +25,12 @@ export function StoreProductCard({ product, className }: StoreProductCardProps) 
   const currency = useCurrencyStore((s) => s.currency);
   const discount = calcDiscount(product.price, product.compareAtPrice);
   const inCart = mounted && inCartRaw;
+  const { ensureLoggedIn } = useRequireLoginForCart();
 
-  function handleAddToCart() {
+  async function handleAddToCart() {
     if (!product.inStock) return;
+    const ok = await ensureLoggedIn({ productId: product.id, quantity: 1 });
+    if (!ok) return;
     const result = addToCart(product);
     if (result === "exists") {
       void alertAlreadyInCart(product.name);
@@ -85,7 +89,7 @@ export function StoreProductCard({ product, className }: StoreProductCardProps) 
           className="block min-h-[2.5rem] shrink-0"
         >
           <p className="line-clamp-2 text-sm leading-snug text-gray-800 hover:text-[#00498e]">
-            {product.shortDescription || product.name}
+            {product.name}
           </p>
         </Link>
 

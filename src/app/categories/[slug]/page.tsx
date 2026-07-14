@@ -9,7 +9,7 @@ import {
   desktopProducts,
   serverProducts,
   gamingPcProducts,
-  monitorProducts,
+  gamingAccessoryProducts,
   peripheralProducts,
 } from "@/data/products";
 import { SITE_NAME } from "@/lib/constants";
@@ -46,8 +46,8 @@ export default async function CategoryPage({ params }: PageProps) {
           ? serverProducts
           : slug === "gaming-pcs"
             ? gamingPcProducts
-            : slug === "monitors"
-              ? monitorProducts
+            : slug === "gaming-accessories"
+              ? gamingAccessoryProducts
               : slug === "peripherals"
                 ? peripheralProducts
                 : getProductsByCategorySlug(slug);

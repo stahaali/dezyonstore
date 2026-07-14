@@ -8,6 +8,45 @@ const YELLOW = "#ffc107";
 
 export function NewsletterSection() {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = (await res.json()) as {
+        ok?: boolean;
+        message?: string;
+        alreadySubscribed?: boolean;
+        previewUrl?: string | null;
+      };
+
+      if (!res.ok || !data.ok) {
+        toast.error(data.message || "Could not subscribe. Please try again.");
+        return;
+      }
+
+      if (data.alreadySubscribed) {
+        toast.message(data.message || "You are already subscribed.");
+      } else {
+        toast.success(data.message || "Subscribed successfully!");
+        if (data.previewUrl && process.env.NODE_ENV === "development") {
+          console.info("Newsletter welcome email preview:", data.previewUrl);
+        }
+      }
+      setEmail("");
+    } catch {
+      toast.error("Could not subscribe. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <section className="py-12 md:py-16" style={{ backgroundColor: NAVY }}>
@@ -17,11 +56,7 @@ export function NewsletterSection() {
         </h2>
         <form
           className="mx-auto mt-6 flex max-w-xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-center"
-          onSubmit={(e) => {
-            e.preventDefault();
-            toast.success("Subscribed successfully!");
-            setEmail("");
-          }}
+          onSubmit={handleSubmit}
         >
           <input
             type="email"
@@ -29,14 +64,16 @@ export function NewsletterSection() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter Your Email Address..."
-            className="h-12 flex-1 rounded-full border-0 bg-white px-6 text-sm text-black outline-none placeholder:text-[#a9a9a9]"
+            disabled={loading}
+            className="h-12 flex-1 rounded-full border-0 bg-white px-6 text-sm text-black outline-none placeholder:text-[#a9a9a9] disabled:opacity-70"
           />
           <button
             type="submit"
-            className="h-12 shrink-0 rounded-full px-8 text-sm font-bold text-black transition-colors hover:brightness-95"
+            disabled={loading}
+            className="h-12 shrink-0 cursor-pointer rounded-full px-8 text-sm font-bold text-black transition-colors hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-70"
             style={{ backgroundColor: YELLOW }}
           >
-            Subscribe
+            {loading ? "Subscribing..." : "Subscribe"}
           </button>
         </form>
         <p className="mx-auto mt-4 max-w-lg text-xs leading-relaxed text-[#d1d5db]">

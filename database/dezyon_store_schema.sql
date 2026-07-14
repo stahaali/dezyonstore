@@ -30,6 +30,7 @@ DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `coupons`;
 DROP TABLE IF EXISTS `cart_items`;
 DROP TABLE IF EXISTS `carts`;
+DROP TABLE IF EXISTS `newsletter_subscribers`;
 
 CREATE TABLE `users` (
   `id` VARCHAR(36) NOT NULL,
@@ -309,6 +310,23 @@ CREATE TABLE `wishlist_items` (
     FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `wishlist_product_fk`
     FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Newsletter
+-- ----------------------------
+CREATE TABLE `newsletter_subscribers` (
+  `id` VARCHAR(36) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `status` ENUM('ACTIVE','UNSUBSCRIBED') NOT NULL DEFAULT 'ACTIVE',
+  `source` VARCHAR(100) DEFAULT 'website',
+  `welcome_email_sent` TINYINT(1) NOT NULL DEFAULT 0,
+  `subscribed_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `unsubscribed_at` DATETIME DEFAULT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `newsletter_email_unique` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 SET FOREIGN_KEY_CHECKS = 1;

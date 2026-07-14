@@ -15,6 +15,7 @@ import { useCompareStore } from "@/store/compare-store";
 import { calcDiscount, cn, formatPrice } from "@/lib/utils";
 import { alertAddedToCart, alertAlreadyInCart } from "@/lib/cart-alerts";
 import { useHasMounted } from "@/hooks/use-has-mounted";
+import { useRequireLoginForCart } from "@/hooks/use-require-login-for-cart";
 
 interface ProductCardProps {
   product: Product;
@@ -31,9 +32,12 @@ export function ProductCard({ product, className }: ProductCardProps) {
   const isWishlisted = mounted && isWishlistedRaw;
   const addCompare = useCompareStore((s) => s.add);
   const discount = calcDiscount(product.price, product.compareAtPrice);
+  const { ensureLoggedIn } = useRequireLoginForCart();
 
-  function handleAddToCart(e: React.MouseEvent) {
+  async function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault();
+    const ok = await ensureLoggedIn({ productId: product.id, quantity: 1 });
+    if (!ok) return;
     const result = addToCart(product);
     if (result === "exists") {
       void alertAlreadyInCart(product.name);

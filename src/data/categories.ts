@@ -12,7 +12,7 @@ export const categories: Category[] = [
   { id: "cat-ssd", name: "SSD", slug: "ssd", description: "NVMe & SATA solid state", image: "https://images.unsplash.com/photo-1531492746076-1614caab2b77?w=600&q=80", productCount: 26 },
   { id: "cat-hdd", name: "Hard Drives", slug: "hard-drives", description: "High-capacity storage", image: "https://images.unsplash.com/photo-1597872200969-2b65d8bd3907?w=600&q=80", productCount: 14 },
   { id: "cat-gaming", name: "Gaming", slug: "gaming", description: "Complete gaming ecosystem", image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80", productCount: 56 },
-  { id: "cat-monitors", name: "Monitors", slug: "monitors", description: "4K, ultrawide & gaming displays inspired by Amazon.ca", image: "/assets/images/optimized/products/monitors/1-samsung-g55a.png", productCount: 10 },
+  { id: "cat-gaming-accessories", name: "Gaming Accessories", slug: "gaming-accessories", description: "Gaming keyboards, mice, headsets & more — inspired by CZone", image: "/assets/images/optimized/products/gaming-accessories/1-g502.png", productCount: 10 },
   { id: "cat-peripherals", name: "Peripherals", slug: "peripherals", description: "Keyboards, mice, headsets and more for work & gaming", image: "/assets/images/optimized/products/peripherals/1-mx-keys.png", productCount: 30 },
   { id: "cat-keyboards", name: "Keyboards", slug: "keyboards", description: "Mechanical & wireless", image: "https://images.unsplash.com/photo-1511467592992-7a57e69e550b?w=600&q=80", productCount: 40 },
   { id: "cat-mouse", name: "Mouse", slug: "mouse", description: "Precision gaming mice", image: "https://images.unsplash.com/photo-1527864554075-7fd91ec51a46?w=600&q=80", productCount: 28 },
