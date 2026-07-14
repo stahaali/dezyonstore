@@ -13,7 +13,22 @@ interface CategoryCatalogProps {
   products: Product[];
   /** When true (e.g. Razer), show product-type options under Category */
   showTypeFilters?: boolean;
+  /** Peripherals page: Brand section shows type categories instead of brands */
+  brandAsCategories?: boolean;
+  /** Hide these Brand category options (e.g. Gaming Accessories: Mouse, Webcam) */
+  hideBrandCategories?: string[];
 }
+
+const PERIPHERAL_CATEGORIES = [
+  "Keyboard",
+  "Mouse",
+  "Headphone",
+  "Gaming Mouse",
+  "Webcam",
+  "Mouse Pad",
+] as const;
+
+type PeripheralCategory = (typeof PERIPHERAL_CATEGORIES)[number];
 
 function buildBrandFacets(products: Product[]): Facet[] {
   const map = new Map<string, number>();
@@ -25,27 +40,35 @@ function buildBrandFacets(products: Product[]): Facet[] {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
-/** Infer storefront type from name/slug — used for Razer category options */
+/** Infer storefront type from name/slug — used for Razer / GA category options */
 export function getProductType(product: Product): string {
   const t =
     `${product.name} ${product.slug} ${product.shortDescription}`.toLowerCase();
 
+  if (/\b(mouse\s*pad|desk mat|mm700|pluto)\b/.test(t)) {
+    return "Mouse Pads";
+  }
   if (
-    /\b(mouse|mice|deathadder|viper|basilisk|orochi|cobra|katar|g502|g203)\b/.test(
+    /\b(gaming\s*mouse|deathadder|viper|basilisk|orochi|cobra|katar|g502|g203|bloody\s*v8)\b/.test(
       t,
     )
   ) {
-    return "Mice";
+    return "Mouse";
+  }
+  if (/\b(mouse|mice|mx master)\b/.test(t) && !/\bcombo\b/.test(t)) {
+    return "Mouse";
   }
   if (
-    /\b(keyboard|blackwidow|huntsman|ornata|kumara|g213|pop keys|mx keys)\b/.test(
+    /\b(keyboard|blackwidow|huntsman|ornata|kumara|g213|pop keys|mx keys|g613)\b/.test(
       t,
     )
   ) {
     return "Keyboards";
   }
   if (
-    /\b(headset|kraken|blackshark|cloud|stinger|arctis|headphones)\b/.test(t)
+    /\b(headset|kraken|blackshark|cloud|stinger|arctis|headphones|headphone)\b/.test(
+      t,
+    )
   ) {
     return "Headsets";
   }
@@ -54,9 +77,6 @@ export function getProductType(product: Product): string {
   }
   if (/\b(mic|microphone|seiren|webcam|c920|brio)\b/.test(t)) {
     return "Audio & Cameras";
-  }
-  if (/\b(mouse\s*pad|desk mat|mm700)\b/.test(t)) {
-    return "Mouse Pads";
   }
   if (/\b(controller|gamepad|f310)\b/.test(t)) {
     return "Controllers";
@@ -67,6 +87,67 @@ export function getProductType(product: Product): string {
   return "Other";
 }
 
+/** Peripherals Brand-section categories (as requested) */
+export function getPeripheralCategory(product: Product): PeripheralCategory | "Other" {
+  const t =
+    `${product.name} ${product.slug} ${product.shortDescription}`.toLowerCase();
+
+  if (/\b(mouse\s*pad|desk mat|mm700|pluto|mp-75)\b/.test(t)) {
+    return "Mouse Pad";
+  }
+  if (/\b(webcam|c920|brio|camera)\b/.test(t)) {
+    return "Webcam";
+  }
+  if (
+    /\b(gaming\s*mouse|deathadder|viper|basilisk|orochi|cobra|katar|g502|g203|bloody\s*v8|m930)\b/.test(
+      t,
+    )
+  ) {
+    return "Gaming Mouse";
+  }
+  if (
+    /\b(headset|headphone|kraken|blackshark|cloud|stinger|arctis|headphones)\b/.test(
+      t,
+    )
+  ) {
+    return "Headphone";
+  }
+  if (
+    /\b(keyboard|blackwidow|huntsman|ornata|kumara|g213|pop keys|mx keys|g613|k70|vajra|fstyler|mk220)\b/.test(
+      t,
+    )
+  ) {
+    return "Keyboard";
+  }
+  if (/\b(mouse|mice|mx master)\b/.test(t) && !/\bcombo\b/.test(t)) {
+    return "Mouse";
+  }
+  if (/\bcombo\b/.test(t)) {
+    // Keyboard+mouse combo counts under Keyboard
+    return "Keyboard";
+  }
+  return "Other";
+}
+
+function buildPeripheralCategoryFacets(
+  products: Product[],
+  hide: string[] = [],
+): Facet[] {
+  const map = new Map<string, number>();
+  for (const name of PERIPHERAL_CATEGORIES) map.set(name, 0);
+  for (const p of products) {
+    const type = getPeripheralCategory(p);
+    if (type === "Other") continue;
+    map.set(type, (map.get(type) ?? 0) + 1);
+  }
+  return PERIPHERAL_CATEGORIES.filter((name) => !hide.includes(name)).map(
+    (name) => ({
+      name,
+      count: map.get(name) ?? 0,
+    }),
+  );
+}
+
 function buildTypeFacets(products: Product[]): Facet[] {
   const map = new Map<string, number>();
   for (const p of products) {
@@ -74,7 +155,7 @@ function buildTypeFacets(products: Product[]): Facet[] {
     map.set(type, (map.get(type) ?? 0) + 1);
   }
   const order = [
-    "Mice",
+    "Mouse",
     "Keyboards",
     "Headsets",
     "Laptops",
@@ -127,10 +208,17 @@ export function CategoryCatalog({
   categoryName,
   products,
   showTypeFilters = false,
+  brandAsCategories = false,
+  hideBrandCategories = [],
 }: CategoryCatalogProps) {
   const brandFacets = useMemo(() => buildBrandFacets(products), [products]);
   const typeFacets = useMemo(() => buildTypeFacets(products), [products]);
+  const peripheralFacets = useMemo(
+    () => buildPeripheralCategoryFacets(products, hideBrandCategories),
+    [products, hideBrandCategories],
+  );
   const useTypes = showTypeFilters && typeFacets.length > 0;
+  const brandSectionFacets = brandAsCategories ? peripheralFacets : brandFacets;
 
   const inStockCount = products.filter((p) => p.inStock).length;
   const outStockCount = products.length - inStockCount;
@@ -176,8 +264,12 @@ export function CategoryCatalog({
       ) {
         return false;
       }
-      if (selectedBrands.length > 0 && !selectedBrands.includes(p.brandName)) {
-        return false;
+      if (selectedBrands.length > 0) {
+        if (brandAsCategories) {
+          if (!selectedBrands.includes(getPeripheralCategory(p))) return false;
+        } else if (!selectedBrands.includes(p.brandName)) {
+          return false;
+        }
       }
       if (availability.inStock || availability.outOfStock) {
         if (availability.inStock && availability.outOfStock) {
@@ -187,7 +279,7 @@ export function CategoryCatalog({
       }
       return true;
     });
-  }, [products, selectedTypes, selectedBrands, availability]);
+  }, [products, selectedTypes, selectedBrands, availability, brandAsCategories]);
 
   const sidebar = (
     <aside className="overflow-hidden rounded-xl border border-gray-200 bg-[#f2f2f2]">
@@ -225,17 +317,17 @@ export function CategoryCatalog({
         onToggle={() => setOpen((s) => ({ ...s, brand: !s.brand }))}
       >
         <ul className="space-y-2.5">
-          {brandFacets.map((brand) => (
-            <li key={brand.name}>
+          {brandSectionFacets.map((item) => (
+            <li key={item.name}>
               <label className="flex cursor-pointer items-center gap-2.5 text-sm text-gray-800">
                 <input
                   type="checkbox"
-                  checked={selectedBrands.includes(brand.name)}
-                  onChange={() => toggleBrand(brand.name)}
+                  checked={selectedBrands.includes(item.name)}
+                  onChange={() => toggleBrand(item.name)}
                   className="h-4 w-4 rounded border-gray-400 accent-gray-900"
                 />
                 <span>
-                  {brand.name} ({brand.count})
+                  {item.name} ({item.count})
                 </span>
               </label>
             </li>
@@ -287,14 +379,11 @@ export function CategoryCatalog({
 
   return (
     <div>
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm font-medium text-gray-500">
-          {filtered.length} result{filtered.length === 1 ? "" : "s"}
-        </p>
+      <div className="mb-5 flex flex-wrap items-center justify-end gap-3 lg:hidden">
         <button
           type="button"
           onClick={() => setMobileFiltersOpen((v) => !v)}
-          className="cursor-pointer rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-900 lg:hidden"
+          className="cursor-pointer rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-900"
         >
           {mobileFiltersOpen ? "Hide filters" : "Filters"}
         </button>

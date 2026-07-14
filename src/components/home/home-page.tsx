@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { HeroBanners } from "@/components/home/hero-banners";
-import { CircularCategories } from "@/components/home/circular-categories";
 import { ProductGridSection } from "@/components/home/product-grid-section";
 import { CategoryCarouselSection } from "@/components/home/category-carousel-section";
 import { GamingChairsSection } from "@/components/home/gaming-chairs-section";
@@ -41,7 +40,6 @@ export function HomePage() {
   return (
     <>
       <HeroBanners />
-      <CircularCategories />
 
       <ProductGridSection
         id="laptops"

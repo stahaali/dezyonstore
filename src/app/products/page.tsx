@@ -33,7 +33,7 @@ export default async function ProductsPage({
         title={query ? `Results for “${query}”` : "All Products"}
         description={
           query
-            ? `${results.length} product${results.length === 1 ? "" : "s"} found`
+            ? "Matching products from our catalog."
             : "Discover laptops, desktops, servers, gaming PCs and more."
         }
         className="mt-4"
