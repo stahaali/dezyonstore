@@ -183,26 +183,25 @@ export function HeroBanners() {
           </div>
         </Link>
 
-        {/* Bottom right — Steelseries */}
+        {/* Bottom right — Steelseries → Gaming PCs */}
         <Link
-          href="/categories/gaming"
+          href="/categories/gaming-pcs"
           className="group relative block h-full min-h-[188px] w-full overflow-hidden rounded-3xl bg-[#d8e5f8]"
+          aria-label="Shop Gaming PCs"
         >
-          {/* Actual banner background — fills whole div */}
           <Image
             src={
               bannerImages["steelseries-bg"] ??
               bannerImages["steelseries-banner"] ??
               bannerImages["steelseries-products"]
             }
-            alt="Steelseries gaming peripherals"
+            alt="Shop Gaming PCs"
             fill
-            className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+            className="pointer-events-none object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
             sizes="(max-width: 1024px) 100vw, 460px"
           />
 
-          {/* Buy Now button — separate HTML layer */}
-          <span className="absolute bottom-4 left-4 z-10 inline-flex items-center gap-2 rounded-full bg-[#142846] px-5 py-2.5 text-[12px] font-bold text-white shadow-sm transition-colors group-hover:bg-[#0f1f38] md:bottom-5 md:left-5 md:text-[13px]">
+          <span className="pointer-events-none absolute bottom-4 left-4 z-10 inline-flex items-center gap-2 rounded-full bg-[#142846] px-5 py-2.5 text-[12px] font-bold text-white shadow-sm transition-colors group-hover:bg-[#0f1f38] md:bottom-5 md:left-5 md:text-[13px]">
             Buy Now
             <FontAwesomeIcon icon={faArrowRight} className="h-3 w-3" />
           </span>
