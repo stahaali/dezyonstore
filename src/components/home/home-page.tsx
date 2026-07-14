@@ -51,7 +51,7 @@ export function HomePage() {
 
       <ProductGridSection
         id="desktops"
-        title="Desktops"
+        title="LCDs"
         products={desktopsHome}
         viewAllHref="/categories/desktop-pcs"
       />

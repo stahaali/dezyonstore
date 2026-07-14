@@ -448,7 +448,14 @@ export function ProductDetailView({ product, categoryName }: Props) {
             {openReturns ? (
               <p className="pb-3 text-sm text-gray-600">
                 Unused products in original packaging can be returned within 7
-                days. Opened software and licenses are non-returnable.
+                days. Opened software and licenses are non-returnable.{" "}
+                <Link
+                  href="/return-exchange"
+                  className="font-medium text-[#00498e] hover:underline"
+                >
+                  View full Return & Exchange policy
+                </Link>
+                .
               </p>
             ) : null}
           </div>

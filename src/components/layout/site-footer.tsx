@@ -4,25 +4,25 @@ import { MapPin, Phone, Mail } from "lucide-react";
 import { FOOTER_SOCIAL_ICONS } from "@/components/icons/social-icons";
 
 const productLinks = [
+  { label: "Home", href: "/" },
   { label: "Laptops", href: "/categories/laptops" },
-  { label: "Desktop Computers", href: "/categories/desktop-pcs" },
-  { label: "Gaming Consoles", href: "/categories/gaming" },
-  { label: "Graphic Cards", href: "/categories/graphic-cards" },
-  { label: "Hard Drives", href: "/categories/hard-drives" },
+  { label: "LCDs", href: "/categories/desktop-pcs" },
+  { label: "Servers", href: "/categories/servers" },
+  { label: "Gaming Pc", href: "/categories/gaming-pcs" },
   { label: "Gaming Accessories", href: "/categories/gaming-accessories" },
+  { label: "Peripherals", href: "/categories/peripherals" },
 ];
 
 const accountLinks = [
   { label: "Sign Up", href: "/account/register" },
   { label: "My Account", href: "/account" },
   { label: "Shopping Cart", href: "/cart" },
-  { label: "Order History", href: "/account/orders" },
 ];
 
 const corporateLinks = [
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
-  { label: "Return & Exchange", href: "#" },
+  { label: "Return & Exchange", href: "/return-exchange" },
 ];
 
 const socialLinks = FOOTER_SOCIAL_ICONS;
@@ -38,7 +38,7 @@ export function SiteFooter() {
           <div>
             <p className="text-sm leading-[1.7] text-gray-800">
               Welcome to Dezyon Store. Online computer store in Canada. Buy
-              Laptops, Desktops, Servers, Gaming PC at the best prices in Canada.
+              Laptops, LCDs, Servers, Gaming PC at the best prices in Canada.
             </p>
 
             <ul className="mt-6 space-y-3.5 text-sm text-gray-800">

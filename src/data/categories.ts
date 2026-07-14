@@ -2,7 +2,7 @@ import type { Category } from "@/types";
 
 export const categories: Category[] = [
   { id: "cat-laptops", name: "Laptops", slug: "laptops", description: "Portable power for work and play", image: "/assets/images/optimized/products/laptops/1-fit.png", productCount: 11 },
-  { id: "cat-desktops", name: "Desktop PCs", slug: "desktop-pcs", description: "All-in-One and office desktop computers", image: "/assets/images/optimized/products/desktops/1-fit.png", productCount: 18 },
+  { id: "cat-desktops", name: "LCDs", slug: "desktop-pcs", description: "LCD / LED monitors and All-in-One displays", image: "/assets/images/optimized/products/desktops/1-fit.png", productCount: 18 },
   { id: "cat-servers", name: "Servers", slug: "servers", description: "Tower, rack, and NAS servers for home & business", image: "/assets/images/optimized/products/servers/9-fit.png", productCount: 10 },
   { id: "cat-gaming-pcs", name: "Gaming PCs", slug: "gaming-pcs", description: "Prebuilt RTX gaming desktops ready to play", image: "/assets/images/optimized/products/gaming-pcs/alienware-aurora.png", productCount: 10 },
   { id: "cat-gpu", name: "Graphic Cards", slug: "graphic-cards", description: "High-performance GPUs", image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600&q=80", productCount: 24 },

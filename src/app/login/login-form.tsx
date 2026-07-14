@@ -128,9 +128,8 @@ export default function LoginPage() {
                 name="email"
                 type="email"
                 required
-                defaultValue={
-                  panel === "admin" ? "admin@dezyon.store" : "user@dezyon.store"
-                }
+                defaultValue={panel === "admin" ? "admin@dezyon.store" : ""}
+                placeholder={panel === "admin" ? undefined : "Enter your email"}
                 key={panel}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 outline-none focus:border-[#00498e]"
               />
