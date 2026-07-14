@@ -1267,8 +1267,8 @@ export const products: Product[] = [
       "Razer Huntsman Elite Optical Gaming Keyboard as sold on stores like CZone. Instant optical actuation, 4-side underglow Chroma RGB, leatherette wrist rest, and multi-function media dial for serious desktop setups.",
     price: 189.99,
     compareAtPrice: 229.99,
-    categoryId: "cat-gaming-accessories",
-    categorySlug: "gaming-accessories",
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
     brandId: "br-asus",
     brandSlug: "asus",
     brandName: "Razer",
@@ -1594,8 +1594,8 @@ export const products: Product[] = [
     description:
       "Razer BlackShark V2 X Gaming Headset. Lightweight esports-tuned headset with crystal-clear mic, plush ear cushions, and Razer signature green accents — Amazon.ca-ready.",
     price: 69,
-    categoryId: "cat-peripherals",
-    categorySlug: "peripherals",
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
     brandId: "br-msi",
     brandSlug: "msi",
     brandName: "Razer",
@@ -1895,8 +1895,8 @@ export const products: Product[] = [
       "Razer DeathAdder V3 ergonomic esports mouse. Ultra-light, Focus Pro 30K optical sensor, optical switches — precision FPS mouse for competitive gaming.",
     price: 99,
     compareAtPrice: 119,
-    categoryId: "cat-peripherals",
-    categorySlug: "peripherals",
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
     brandId: "br-msi",
     brandSlug: "msi",
     brandName: "Razer",
@@ -1970,8 +1970,8 @@ export const products: Product[] = [
       "Razer Kraken V3 X wired gaming headset. Lightweight build, clear mic, immersive drivers — everyday headset for PC and console gaming.",
     price: 59,
     compareAtPrice: 69,
-    categoryId: "cat-peripherals",
-    categorySlug: "peripherals",
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
     brandId: "br-msi",
     brandSlug: "msi",
     brandName: "Razer",
@@ -2145,8 +2145,8 @@ export const products: Product[] = [
       "Razer BlackWidow V4 X mechanical gaming keyboard. Linear Yellow switches, Chroma RGB, media controls — full-size Razer keyboard for gaming and typing.",
     price: 139,
     compareAtPrice: 159,
-    categoryId: "cat-peripherals",
-    categorySlug: "peripherals",
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
     brandId: "br-msi",
     brandSlug: "msi",
     brandName: "Razer",
@@ -2547,6 +2547,7 @@ export function getProductsByCategorySlug(slug: string) {
       (p) =>
         /^ga\d+$/.test(p.id) &&
         p.categorySlug === "gaming-accessories" &&
+        p.brandName !== "Razer" &&
         (p.images[0]?.url.includes("/products/gaming-accessories/") ?? false),
     );
   }
@@ -2555,7 +2556,15 @@ export function getProductsByCategorySlug(slug: string) {
       (p) =>
         /^pe\d+$/.test(p.id) &&
         p.categorySlug === "peripherals" &&
+        p.brandName !== "Razer" &&
         (p.images[0]?.url.includes("/products/peripherals/") ?? false),
+    );
+  }
+  if (slug === "razer-products") {
+    return products.filter(
+      (p) =>
+        p.categorySlug === "razer-products" &&
+        p.brandName === "Razer",
     );
   }
   return products.filter((p) => p.categorySlug === slug);
@@ -2571,12 +2580,7 @@ export const gamingAccessoryProducts = getProductsByCategorySlug(
   "gaming-accessories",
 );
 export const peripheralProducts = getProductsByCategorySlug("peripherals");
-export const razerProducts = products.filter(
-  (p) =>
-    /^rz\d+$/.test(p.id) &&
-    p.categorySlug === "razer-products" &&
-    (p.images[0]?.url.includes("/products/razer/") ?? false),
-);
+export const razerProducts = getProductsByCategorySlug("razer-products");
 
 export const featuredProducts = products.filter((p) => p.isFeatured);
 export const featuredProductsHome = products
@@ -2593,7 +2597,8 @@ export const gamingAccessoriesNavHome = products
   .filter(
     (p) =>
       /^ga\d+$/.test(p.id) &&
-      p.categorySlug === "gaming-accessories",
+      p.categorySlug === "gaming-accessories" &&
+      p.brandName !== "Razer",
   )
   .slice(0, 6);
 export const gamingAccessoriesHome = products
