@@ -13,6 +13,7 @@
   },
   "banners": {
     "main": "/assets/images/optimized/banners/main.webp",
+    "homebanner1": "/assets/images/optimized/banners/homebanner1.webp",
     "hero-main": "/assets/images/optimized/banners/hero-main.webp",
     "hero-headphones": "/assets/images/optimized/banners/hero-headphones.webp",
     "hero-model": "/assets/images/optimized/banners/hero-model.webp",
