@@ -10,6 +10,7 @@ const productLinks = [
   { label: "Servers", href: "/categories/servers" },
   { label: "Gaming Pc", href: "/categories/gaming-pcs" },
   { label: "Gaming Accessories", href: "/categories/gaming-accessories" },
+  { label: "Gaming Chair", href: "/categories/gaming-chairs" },
   { label: "Peripherals", href: "/categories/peripherals" },
   { label: "Razer Accessories", href: "/categories/razer-products" },
 ];

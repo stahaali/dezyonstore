@@ -10,6 +10,7 @@ import {
   serverProducts,
   gamingPcProducts,
   gamingAccessoryProducts,
+  gamingChairProducts,
   peripheralProducts,
   razerProducts,
 } from "@/data/products";
@@ -39,6 +40,7 @@ function resolveCategoryProducts(slug: string) {
   if (slug === "servers") return serverProducts;
   if (slug === "gaming-pcs") return gamingPcProducts;
   if (slug === "gaming-accessories") return gamingAccessoryProducts;
+  if (slug === "gaming-chairs") return gamingChairProducts;
   if (slug === "peripherals") return peripheralProducts;
   if (slug === "razer-products") return razerProducts;
   // Never fall back to loose slug match for GA/PE (already handled above)
