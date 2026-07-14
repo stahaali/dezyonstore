@@ -13,6 +13,8 @@ import { useCartStore } from "@/store/cart-store";
 import { useWishlistStore } from "@/store/wishlist-store";
 import { useCompareStore } from "@/store/compare-store";
 import { calcDiscount, cn, formatPrice } from "@/lib/utils";
+import { alertAddedToCart, alertAlreadyInCart } from "@/lib/cart-alerts";
+import { useHasMounted } from "@/hooks/use-has-mounted";
 
 interface ProductCardProps {
   product: Product;
@@ -20,11 +22,25 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, className }: ProductCardProps) {
+  const mounted = useHasMounted();
   const addToCart = useCartStore((s) => s.addItem);
+  const inCartRaw = useCartStore((s) => s.hasItem(product.id));
+  const inCart = mounted && inCartRaw;
   const toggleWishlist = useWishlistStore((s) => s.toggle);
-  const isWishlisted = useWishlistStore((s) => s.has(product.id));
+  const isWishlistedRaw = useWishlistStore((s) => s.has(product.id));
+  const isWishlisted = mounted && isWishlistedRaw;
   const addCompare = useCompareStore((s) => s.add);
   const discount = calcDiscount(product.price, product.compareAtPrice);
+
+  function handleAddToCart(e: React.MouseEvent) {
+    e.preventDefault();
+    const result = addToCart(product);
+    if (result === "exists") {
+      void alertAlreadyInCart(product.name);
+      return;
+    }
+    void alertAddedToCart(product.name);
+  }
 
   return (
     <motion.article
@@ -57,14 +73,10 @@ export function ProductCard({ product, className }: ProductCardProps) {
           <Button
             size="sm"
             className="flex-1"
-            onClick={(e) => {
-              e.preventDefault();
-              addToCart(product);
-              toast.success("Added to cart", { description: product.name });
-            }}
+            onClick={handleAddToCart}
           >
             <ShoppingCart className="h-4 w-4" />
-            Add
+            {inCart ? "In Cart" : "Add"}
           </Button>
         </div>
       </Link>

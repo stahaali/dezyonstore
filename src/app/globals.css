@@ -57,6 +57,24 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+a[href],
+input[type="submit"]:not(:disabled),
+input[type="button"]:not(:disabled),
+label[for],
+select:not(:disabled),
+summary {
+  cursor: pointer;
+}
+
+button:disabled,
+[aria-disabled="true"],
+input:disabled,
+select:disabled {
+  cursor: not-allowed;
+}
+
 ::selection {
   background: var(--accent);
   color: white;

@@ -2,7 +2,7 @@ import type { Category } from "@/types";
 
 export const categories: Category[] = [
   { id: "cat-laptops", name: "Laptops", slug: "laptops", description: "Portable power for work and play", image: "/assets/images/optimized/products/laptops/1-fit.png", productCount: 11 },
-  { id: "cat-desktops", name: "Desktop PCs", slug: "desktop-pcs", description: "Custom and pre-built desktops", image: "/assets/images/optimized/products/desktops/1-fit.png", productCount: 10 },
+  { id: "cat-desktops", name: "Desktop PCs", slug: "desktop-pcs", description: "All-in-One and office desktop computers", image: "/assets/images/optimized/products/desktops/1-fit.png", productCount: 18 },
   { id: "cat-servers", name: "Servers", slug: "servers", description: "Tower, rack, and NAS servers for home & business", image: "/assets/images/optimized/products/servers/9-fit.png", productCount: 10 },
   { id: "cat-gaming-pcs", name: "Gaming PCs", slug: "gaming-pcs", description: "Prebuilt RTX gaming desktops ready to play", image: "/assets/images/optimized/products/gaming-pcs/alienware-aurora.png", productCount: 10 },
   { id: "cat-gpu", name: "Graphic Cards", slug: "graphic-cards", description: "High-performance GPUs", image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600&q=80", productCount: 24 },
@@ -13,7 +13,7 @@ export const categories: Category[] = [
   { id: "cat-hdd", name: "Hard Drives", slug: "hard-drives", description: "High-capacity storage", image: "https://images.unsplash.com/photo-1597872200969-2b65d8bd3907?w=600&q=80", productCount: 14 },
   { id: "cat-gaming", name: "Gaming", slug: "gaming", description: "Complete gaming ecosystem", image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80", productCount: 56 },
   { id: "cat-monitors", name: "Monitors", slug: "monitors", description: "4K, ultrawide & gaming displays inspired by Amazon.ca", image: "/assets/images/optimized/products/monitors/1-samsung-g55a.png", productCount: 10 },
-  { id: "cat-peripherals", name: "Peripherals", slug: "peripherals", description: "Keyboards, mice, headsets and more for work & gaming", image: "/assets/images/optimized/products/peripherals/1-mx-keys.png", productCount: 10 },
+  { id: "cat-peripherals", name: "Peripherals", slug: "peripherals", description: "Keyboards, mice, headsets and more for work & gaming", image: "/assets/images/optimized/products/peripherals/1-mx-keys.png", productCount: 30 },
   { id: "cat-keyboards", name: "Keyboards", slug: "keyboards", description: "Mechanical & wireless", image: "https://images.unsplash.com/photo-1511467592992-7a57e69e550b?w=600&q=80", productCount: 40 },
   { id: "cat-mouse", name: "Mouse", slug: "mouse", description: "Precision gaming mice", image: "https://images.unsplash.com/photo-1527864554075-7fd91ec51a46?w=600&q=80", productCount: 28 },
   { id: "cat-networking", name: "Networking", slug: "networking", description: "Routers, switches & adapters", image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80", productCount: 20 },

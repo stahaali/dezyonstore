@@ -10,11 +10,13 @@ import { cn } from "@/lib/utils";
 export function CircularCategories() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
+    loop: true,
     slidesToScroll: 1,
-    containScroll: "trimSnaps",
+    containScroll: false,
   });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [paused, setPaused] = useState(false);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -35,9 +37,21 @@ export function CircularCategories() {
     };
   }, [emblaApi, onSelect]);
 
+  useEffect(() => {
+    if (!emblaApi || paused) return;
+    const interval = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [emblaApi, paused]);
+
   return (
     <section className="border-b border-gray-200 bg-white py-8 md:py-10">
-      <div className="mx-auto max-w-[1400px] px-4">
+      <div
+        className="mx-auto max-w-[1400px] px-4"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
         <div ref={emblaRef} className="overflow-hidden">
           <div className="flex gap-5 md:gap-6">
             {quickCategories.map((cat) => (

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
+import { ShopShell } from "@/components/layout/shop-shell";
 import { Providers } from "@/components/providers";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import "@/lib/fontawesome";
@@ -37,9 +36,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={`${geistSans.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-gray-50 text-foreground antialiased">
         <Providers>
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
+          <ShopShell>{children}</ShopShell>
         </Providers>
       </body>
     </html>

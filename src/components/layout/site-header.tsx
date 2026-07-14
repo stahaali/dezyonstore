@@ -20,6 +20,7 @@ import { products } from "@/data/products";
 import { secondaryNav } from "@/data/home";
 import { siteLogo } from "@/data/site-assets";
 import { filterProductsByQuery } from "@/lib/search-products";
+import { useHasMounted } from "@/hooks/use-has-mounted";
 import type { CurrencyCode } from "@/lib/format-price";
 
 const HEADER_TOP = "#00498e";
@@ -32,15 +33,21 @@ const CURRENCIES: { code: CurrencyCode; flagSrc: string; label: string }[] = [
 
 export function SiteHeader() {
   const router = useRouter();
+  const mounted = useHasMounted();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const [currencyOpen, setCurrencyOpen] = useState(false);
 
-  const cartCount = useCartStore((s) => s.totalItems());
-  const wishlistCount = useWishlistStore((s) => s.items.length);
-  const currency = useCurrencyStore((s) => s.currency);
+  const cartCountRaw = useCartStore((s) => s.totalItems());
+  const openCart = useCartStore((s) => s.openCart);
+  const wishlistCountRaw = useWishlistStore((s) => s.items.length);
+  const currencyRaw = useCurrencyStore((s) => s.currency);
   const setCurrency = useCurrencyStore((s) => s.setCurrency);
+
+  const cartCount = mounted ? cartCountRaw : 0;
+  const wishlistCount = mounted ? wishlistCountRaw : 0;
+  const currency = mounted ? currencyRaw : "CAD";
 
   const suggestions = useMemo(
     () => filterProductsByQuery(products, searchQuery).slice(0, 6),
@@ -156,9 +163,10 @@ export function SiteHeader() {
           {/* Actions */}
           <div className="ml-auto flex items-center gap-1 sm:gap-2 md:gap-3">
             <Link
-              href="/account"
+              href="/login"
               className="hidden rounded-full p-2.5 transition-colors hover:bg-white/10 sm:flex"
-              aria-label="Account"
+              aria-label="Login"
+              title="Login"
             >
               <User className="h-6 w-6 stroke-[1.5]" />
             </Link>
@@ -175,9 +183,10 @@ export function SiteHeader() {
                 {wishlistCount}
               </span>
             </Link>
-            <Link
-              href="/cart"
-              className="relative rounded-full p-2.5 transition-colors hover:bg-white/10"
+            <button
+              type="button"
+              onClick={openCart}
+              className="relative cursor-pointer rounded-full p-2.5 transition-colors hover:bg-white/10"
               aria-label="Cart"
             >
               <ShoppingCart className="h-6 w-6 stroke-[1.5]" />
@@ -187,7 +196,7 @@ export function SiteHeader() {
               >
                 {cartCount}
               </span>
-            </Link>
+            </button>
             <div className="relative hidden md:block">
               <button
                 type="button"

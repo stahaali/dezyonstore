@@ -3,13 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
-import { toast } from "sonner";
 import type { Product } from "@/types";
 import { useCartStore } from "@/store/cart-store";
 import { calcDiscount, cn } from "@/lib/utils";
 import { formatPriceDollar } from "@/lib/format-price";
 import { useCurrencyStore } from "@/store/currency-store";
 import { siteLogo } from "@/data/site-assets";
+import { alertAddedToCart, alertAlreadyInCart } from "@/lib/cart-alerts";
+import { useHasMounted } from "@/hooks/use-has-mounted";
 
 interface StoreProductCardProps {
   product: Product;
@@ -17,9 +18,22 @@ interface StoreProductCardProps {
 }
 
 export function StoreProductCard({ product, className }: StoreProductCardProps) {
+  const mounted = useHasMounted();
   const addToCart = useCartStore((s) => s.addItem);
+  const inCartRaw = useCartStore((s) => s.hasItem(product.id));
   const currency = useCurrencyStore((s) => s.currency);
   const discount = calcDiscount(product.price, product.compareAtPrice);
+  const inCart = mounted && inCartRaw;
+
+  function handleAddToCart() {
+    if (!product.inStock) return;
+    const result = addToCart(product);
+    if (result === "exists") {
+      void alertAlreadyInCart(product.name);
+      return;
+    }
+    void alertAddedToCart(product.name);
+  }
 
   return (
     <article className={cn("flex h-full flex-col bg-transparent", className)}>
@@ -89,20 +103,19 @@ export function StoreProductCard({ product, className }: StoreProductCardProps) 
         <button
           type="button"
           disabled={!product.inStock}
-          onClick={() => {
-            if (product.inStock) {
-              addToCart(product);
-              toast.success("Added to cart");
-            }
-          }}
+          onClick={handleAddToCart}
           className={cn(
             "mt-auto flex h-10 w-full shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white transition-colors",
             product.inStock
-              ? "bg-[#0c2340] hover:bg-[#0a1c33]"
+              ? "cursor-pointer bg-[#0c2340] hover:bg-[#0a1c33]"
               : "cursor-not-allowed bg-gray-400",
           )}
         >
-          {product.inStock ? "Add To Cart" : "Out Of Stock"}
+          {!product.inStock
+            ? "Out Of Stock"
+            : inCart
+              ? "In Cart"
+              : "Add To Cart"}
         </button>
       </div>
     </article>
