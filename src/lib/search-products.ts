@@ -76,11 +76,17 @@ const INTENT_RULES: IntentRule[] = [
   {
     phrases: ["gaming accessories", "gaming accessory"],
     match: (p) =>
-      p.id.startsWith("ga") && p.categorySlug === "gaming-accessories",
+      /^ga\d+$/.test(p.id) && p.categorySlug === "gaming-accessories",
   },
   {
     phrases: ["peripheral", "peripherals"],
-    match: (p) => p.id.startsWith("pe") && p.categorySlug === "peripherals",
+    match: (p) =>
+      /^pe\d+$/.test(p.id) && p.categorySlug === "peripherals",
+  },
+  {
+    phrases: ["razer", "razer products", "razer product"],
+    match: (p) =>
+      /^rz\d+$/.test(p.id) && p.categorySlug === "razer-products",
   },
   {
     phrases: ["mouse", "mice"],

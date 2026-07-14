@@ -107,4 +107,5 @@ export const secondaryNav = [
   { label: "Gaming Pc", href: "/categories/gaming-pcs", hasDropdown: false },
   { label: "Gaming Accessories", href: "/categories/gaming-accessories", hasDropdown: false },
   { label: "Peripherals", href: "/categories/peripherals", hasDropdown: false },
+  { label: "Razer Accessories", href: "/categories/razer-products", hasDropdown: false },
 ];

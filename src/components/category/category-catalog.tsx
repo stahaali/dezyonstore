@@ -6,14 +6,16 @@ import type { Product } from "@/types";
 import { StoreProductCard } from "@/components/product/store-product-card";
 import { cn } from "@/lib/utils";
 
-type BrandFacet = { name: string; count: number };
+type Facet = { name: string; count: number };
 
 interface CategoryCatalogProps {
   categoryName: string;
   products: Product[];
+  /** When true (e.g. Razer), show product-type options under Category */
+  showTypeFilters?: boolean;
 }
 
-function buildBrandFacets(products: Product[]): BrandFacet[] {
+function buildBrandFacets(products: Product[]): Facet[] {
   const map = new Map<string, number>();
   for (const p of products) {
     map.set(p.brandName, (map.get(p.brandName) ?? 0) + 1);
@@ -21,6 +23,74 @@ function buildBrandFacets(products: Product[]): BrandFacet[] {
   return [...map.entries()]
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/** Infer storefront type from name/slug — used for Razer category options */
+export function getProductType(product: Product): string {
+  const t =
+    `${product.name} ${product.slug} ${product.shortDescription}`.toLowerCase();
+
+  if (
+    /\b(mouse|mice|deathadder|viper|basilisk|orochi|cobra|katar|g502|g203)\b/.test(
+      t,
+    )
+  ) {
+    return "Mice";
+  }
+  if (
+    /\b(keyboard|blackwidow|huntsman|ornata|kumara|g213|pop keys|mx keys)\b/.test(
+      t,
+    )
+  ) {
+    return "Keyboards";
+  }
+  if (
+    /\b(headset|kraken|blackshark|cloud|stinger|arctis|headphones)\b/.test(t)
+  ) {
+    return "Headsets";
+  }
+  if (/\b(laptop|blade|notebook)\b/.test(t)) {
+    return "Laptops";
+  }
+  if (/\b(mic|microphone|seiren|webcam|c920|brio)\b/.test(t)) {
+    return "Audio & Cameras";
+  }
+  if (/\b(mouse\s*pad|desk mat|mm700)\b/.test(t)) {
+    return "Mouse Pads";
+  }
+  if (/\b(controller|gamepad|f310)\b/.test(t)) {
+    return "Controllers";
+  }
+  if (/\b(combo)\b/.test(t)) {
+    return "Combos";
+  }
+  return "Other";
+}
+
+function buildTypeFacets(products: Product[]): Facet[] {
+  const map = new Map<string, number>();
+  for (const p of products) {
+    const type = getProductType(p);
+    map.set(type, (map.get(type) ?? 0) + 1);
+  }
+  const order = [
+    "Mice",
+    "Keyboards",
+    "Headsets",
+    "Laptops",
+    "Audio & Cameras",
+    "Mouse Pads",
+    "Controllers",
+    "Combos",
+    "Other",
+  ];
+  return [...map.entries()]
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => {
+      const ai = order.indexOf(a.name);
+      const bi = order.indexOf(b.name);
+      return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+    });
 }
 
 function FilterSection({
@@ -56,8 +126,11 @@ function FilterSection({
 export function CategoryCatalog({
   categoryName,
   products,
+  showTypeFilters = false,
 }: CategoryCatalogProps) {
   const brandFacets = useMemo(() => buildBrandFacets(products), [products]);
+  const typeFacets = useMemo(() => buildTypeFacets(products), [products]);
+  const useTypes = showTypeFilters && typeFacets.length > 0;
 
   const inStockCount = products.filter((p) => p.inStock).length;
   const outStockCount = products.length - inStockCount;
@@ -68,6 +141,7 @@ export function CategoryCatalog({
     availability: true,
   });
 
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [availability, setAvailability] = useState<{
     inStock: boolean;
@@ -76,14 +150,32 @@ export function CategoryCatalog({
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
+  function toggleType(name: string) {
+    setSelectedTypes((prev) =>
+      prev.includes(name) ? prev.filter((t) => t !== name) : [...prev, name],
+    );
+  }
+
   function toggleBrand(name: string) {
     setSelectedBrands((prev) =>
       prev.includes(name) ? prev.filter((b) => b !== name) : [...prev, name],
     );
   }
 
+  function clearFilters() {
+    setSelectedTypes([]);
+    setSelectedBrands([]);
+    setAvailability({ inStock: false, outOfStock: false });
+  }
+
   const filtered = useMemo(() => {
     return products.filter((p) => {
+      if (
+        selectedTypes.length > 0 &&
+        !selectedTypes.includes(getProductType(p))
+      ) {
+        return false;
+      }
       if (selectedBrands.length > 0 && !selectedBrands.includes(p.brandName)) {
         return false;
       }
@@ -95,7 +187,7 @@ export function CategoryCatalog({
       }
       return true;
     });
-  }, [products, selectedBrands, availability]);
+  }, [products, selectedTypes, selectedBrands, availability]);
 
   const sidebar = (
     <aside className="overflow-hidden rounded-xl border border-gray-200 bg-[#f2f2f2]">
@@ -104,7 +196,27 @@ export function CategoryCatalog({
         open={open.category}
         onToggle={() => setOpen((s) => ({ ...s, category: !s.category }))}
       >
-        <p className="text-sm font-medium text-gray-800">{categoryName}</p>
+        {useTypes ? (
+          <ul className="space-y-2.5">
+            {typeFacets.map((type) => (
+              <li key={type.name}>
+                <label className="flex cursor-pointer items-center gap-2.5 text-sm text-gray-800">
+                  <input
+                    type="checkbox"
+                    checked={selectedTypes.includes(type.name)}
+                    onChange={() => toggleType(type.name)}
+                    className="h-4 w-4 rounded border-gray-400 accent-gray-900"
+                  />
+                  <span>
+                    {type.name} ({type.count})
+                  </span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm font-medium text-gray-800">{categoryName}</p>
+        )}
       </FilterSection>
 
       <FilterSection
@@ -205,14 +317,11 @@ export function CategoryCatalog({
                 No products match these filters
               </p>
               <p className="mt-2 text-sm text-gray-500">
-                Try adjusting brand or availability.
+                Try adjusting category, brand, or availability.
               </p>
               <button
                 type="button"
-                onClick={() => {
-                  setSelectedBrands([]);
-                  setAvailability({ inStock: false, outOfStock: false });
-                }}
+                onClick={clearFilters}
                 className="mt-4 cursor-pointer text-sm font-semibold text-[#00498e] hover:underline"
               >
                 Clear filters

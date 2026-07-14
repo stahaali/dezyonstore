@@ -4,8 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { bannerImages } from "@/data/site-assets";
 import { cn } from "@/lib/utils";
 
@@ -78,9 +76,8 @@ export function HeroBanners() {
       className="scroll-mt-28 bg-white py-4 md:py-6 lg:scroll-mt-32"
       id="homebanner"
     >
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-4 px-4 lg:grid-cols-3">
-        {/* Main carousel — 2/3 width */}
-        <div className="relative overflow-hidden rounded-3xl lg:col-span-2 lg:row-span-2">
+      <div className="mx-auto max-w-[1400px] px-4">
+        <div className="relative overflow-hidden rounded-3xl">
           <div ref={emblaRef} className="h-full overflow-hidden">
             <div className="flex h-full">
               {heroSlides.map((slide) => (
@@ -143,69 +140,6 @@ export function HeroBanners() {
             ))}
           </div>
         </div>
-
-        {/* Top right — Used Laptops */}
-        <Link
-          href="/categories/laptops"
-          className="group relative flex h-full min-h-[188px] w-full items-center overflow-hidden rounded-3xl bg-[#b8d1f5]"
-        >
-          {/* Full-bleed blue always covers the div */}
-          <div className="absolute inset-0 bg-[#b8d1f5]" aria-hidden />
-
-          {/* Large laptop on the right */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-[72%] sm:w-[68%]">
-            <Image
-              src={bannerImages.combo ?? bannerImages["laptop-cutout"]}
-              alt=""
-              fill
-              className="object-contain object-right-bottom transition-transform duration-500 group-hover:scale-[1.04]"
-              sizes="320px"
-            />
-          </div>
-
-          {/* Text card */}
-          <div className="relative z-10 ml-3 my-3 w-[52%] max-w-[210px] rounded-[20px] bg-[#e6f0ff] px-4 py-4 shadow-sm md:ml-4 md:px-5 md:py-5">
-            <p className="text-[12px] font-medium text-gray-600 md:text-[13px]">
-              Tested. Trusted.
-            </p>
-            <p className="mt-1 text-[17px] font-bold leading-tight text-[#1a1a1a] md:text-[19px]">
-              Used Laptops
-            </p>
-            <p className="mt-2 text-[11px] leading-snug text-gray-700 md:text-[12px]">
-              Ready to Work
-            </p>
-            <p className="text-[11px] leading-snug text-gray-700 md:text-[12px]">
-              at Unbeatable Prices
-            </p>
-            <span className="mt-3 inline-flex rounded-full bg-[#142846] px-5 py-2 text-[11px] font-bold text-white transition-colors group-hover:bg-[#0f1f38] md:text-[12px]">
-              See Offers
-            </span>
-          </div>
-        </Link>
-
-        {/* Bottom right — Steelseries → Gaming PCs */}
-        <Link
-          href="/categories/gaming-pcs"
-          className="group relative block h-full min-h-[188px] w-full overflow-hidden rounded-3xl bg-[#d8e5f8]"
-          aria-label="Shop Gaming PCs"
-        >
-          <Image
-            src={
-              bannerImages["steelseries-bg"] ??
-              bannerImages["steelseries-banner"] ??
-              bannerImages["steelseries-products"]
-            }
-            alt="Shop Gaming PCs"
-            fill
-            className="pointer-events-none object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-            sizes="(max-width: 1024px) 100vw, 460px"
-          />
-
-          <span className="pointer-events-none absolute bottom-4 left-4 z-10 inline-flex items-center gap-2 rounded-full bg-[#142846] px-5 py-2.5 text-[12px] font-bold text-white shadow-sm transition-colors group-hover:bg-[#0f1f38] md:bottom-5 md:left-5 md:text-[13px]">
-            Buy Now
-            <FontAwesomeIcon icon={faArrowRight} className="h-3 w-3" />
-          </span>
-        </Link>
       </div>
     </section>
   );

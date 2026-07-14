@@ -11,6 +11,7 @@ import {
   gamingPcProducts,
   gamingAccessoryProducts,
   peripheralProducts,
+  razerProducts,
 } from "@/data/products";
 import { SITE_NAME } from "@/lib/constants";
 
@@ -39,6 +40,8 @@ function resolveCategoryProducts(slug: string) {
   if (slug === "gaming-pcs") return gamingPcProducts;
   if (slug === "gaming-accessories") return gamingAccessoryProducts;
   if (slug === "peripherals") return peripheralProducts;
+  if (slug === "razer-products") return razerProducts;
+  // Never fall back to loose slug match for GA/PE (already handled above)
   return getProductsByCategorySlug(slug);
 }
 
@@ -71,7 +74,11 @@ export default async function CategoryPage({ params }: PageProps) {
             </p>
           </div>
         ) : (
-          <CategoryCatalog categoryName={category.name} products={items} />
+          <CategoryCatalog
+            categoryName={category.name}
+            products={items}
+            showTypeFilters={slug === "razer-products"}
+          />
         )}
       </div>
     </div>

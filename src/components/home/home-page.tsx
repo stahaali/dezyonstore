@@ -13,7 +13,7 @@ import {
   featuredProductsHome,
   desktopsHome,
   serversHome,
-  gamingAccessoriesHome,
+  peripheralsHome,
   gamingChairsHome,
   gamingAccessoriesNavHome,
 } from "@/data/products";
@@ -77,8 +77,8 @@ export function HomePage() {
       <CategoryCarouselSection
         id="peripherals"
         title="Peripherals"
-        subtitle="Keyboards, mice, headsets and more for gamers"
-        products={gamingAccessoriesHome}
+        subtitle="Keyboards, mice, headsets and more for work & play"
+        products={peripheralsHome}
         viewAllHref="/categories/peripherals"
       />
 

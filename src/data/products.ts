@@ -1782,7 +1782,7 @@ export const products: Product[] = [
     isNew: true,
     badge: "new",
     imageSeed: "pe12",
-    imageUrl: "/assets/images/optimized/products/peripherals/12-a4tech-combo.png",
+    imageUrl: "/assets/images/optimized/products/peripherals/12-a4tech-combo-v2.png",
   }),
   makeProduct({
     id: "pe13",
@@ -2235,10 +2235,264 @@ export const products: Product[] = [
     imageSeed: "pe30",
     imageUrl: "/assets/images/optimized/products/peripherals/30-cobra.png",
   }),
+  // Razer Products — inspired by https://www.razer.com/ca-en/search/razer?sel=products
+  makeProduct({
+    id: "rz1",
+    name: "Razer DeathAdder V4 Pro - Black",
+    slug: "razer-deathadder-v4-pro-black",
+    shortDescription:
+      "Ultra-lightweight ergonomic wireless esports mouse with optical scroll wheel",
+    description:
+      "Razer DeathAdder V4 Pro inspired by Razer Canada. Right-handed ergonomic shape for palm and claw grip, wireless HyperSpeed performance, and optical scroll wheel for competitive FPS play.",
+    price: 259.99,
+    compareAtPrice: 279.99,
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
+    brandId: "br-asus",
+    brandSlug: "asus",
+    brandName: "Razer",
+    rating: 4.9,
+    reviewCount: 640,
+    inStock: true,
+    stock: 28,
+    isFeatured: true,
+    isGaming: true,
+    isNew: true,
+    badge: "new",
+    imageSeed: "rz1",
+    imageUrl: "/assets/images/optimized/products/razer/rz-deathadder.png",
+  }),
+  makeProduct({
+    id: "rz2",
+    name: "Razer Viper V4 Pro - Black",
+    slug: "razer-viper-v4-pro-black",
+    shortDescription:
+      "Ultra-lightweight wireless symmetrical esports gaming mouse under 49g",
+    description:
+      "Razer Viper V4 Pro from the Razer CA lineup. Symmetrical esports mouse with HyperSpeed Wireless Gen-2, optical scroll wheel, and ultra-lightweight build for competitive aim.",
+    price: 229.99,
+    compareAtPrice: 249.99,
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
+    brandId: "br-asus",
+    brandSlug: "asus",
+    brandName: "Razer",
+    rating: 4.8,
+    reviewCount: 512,
+    inStock: true,
+    stock: 34,
+    isFeatured: true,
+    isGaming: true,
+    badge: "sale",
+    imageSeed: "rz2",
+    imageUrl: "/assets/images/optimized/products/razer/rz-viper.png",
+  }),
+  makeProduct({
+    id: "rz3",
+    name: "Razer BlackWidow V4",
+    slug: "razer-blackwidow-v4",
+    shortDescription:
+      "Mechanical gaming keyboard with Chroma RGB, macro keys, and Snap Tap",
+    description:
+      "Razer BlackWidow V4 mechanical keyboard inspired by Razer Canada. Full-size layout with dedicated macros, media controls, Snap Tap support, and per-key Chroma RGB for immersive setups.",
+    price: 229.99,
+    compareAtPrice: 259.99,
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
+    brandId: "br-asus",
+    brandSlug: "asus",
+    brandName: "Razer",
+    rating: 4.7,
+    reviewCount: 890,
+    inStock: true,
+    stock: 22,
+    isFeatured: true,
+    isGaming: true,
+    badge: "sale",
+    imageSeed: "rz3",
+    imageUrl: "/assets/images/optimized/products/razer/rz-blackwidow.png",
+  }),
+  makeProduct({
+    id: "rz4",
+    name: "Razer Huntsman V3 Pro TKL",
+    slug: "razer-huntsman-v3-pro-tkl",
+    shortDescription:
+      "Analog optical TKL esports keyboard with adjustable actuation",
+    description:
+      "Razer Huntsman V3 Pro TKL. Analog optical switches with adjustable actuation, rapid trigger, and tournament-ready aluminum construction — built for ranked and LAN play.",
+    price: 279.99,
+    compareAtPrice: 299.99,
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
+    brandId: "br-asus",
+    brandSlug: "asus",
+    brandName: "Razer",
+    rating: 4.8,
+    reviewCount: 420,
+    inStock: true,
+    stock: 16,
+    isFeatured: true,
+    isGaming: true,
+    isNew: true,
+    badge: "new",
+    imageSeed: "rz4",
+    imageUrl: "/assets/images/optimized/products/razer/rz-huntsman.png",
+  }),
+  makeProduct({
+    id: "rz5",
+    name: "Razer Kraken V4 Pro",
+    slug: "razer-kraken-v4-pro",
+    shortDescription:
+      "Wireless gaming headset with immersive audio and HyperClear mic",
+    description:
+      "Razer Kraken V4 Pro wireless headset inspired by Razer Canada. Immersive drivers, clear broadcast-quality mic, and all-day comfort for gaming and streaming marathon sessions.",
+    price: 349.99,
+    compareAtPrice: 379.99,
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
+    brandId: "br-asus",
+    brandSlug: "asus",
+    brandName: "Razer",
+    rating: 4.6,
+    reviewCount: 310,
+    inStock: true,
+    stock: 20,
+    isFeatured: true,
+    isGaming: true,
+    badge: "sale",
+    imageSeed: "rz5",
+    imageUrl: "/assets/images/optimized/products/razer/rz-kraken.png",
+  }),
+  makeProduct({
+    id: "rz6",
+    name: "Razer BlackShark V3 Pro",
+    slug: "razer-blackshark-v3-pro",
+    shortDescription:
+      "Esports-tuned wireless headset trusted by pro players",
+    description:
+      "Razer BlackShark V3 Pro. Lightweight esports headset with clear TriForce drivers, advanced mic, and long wireless endurance for ranked grind and tournament stages.",
+    price: 279.99,
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
+    brandId: "br-asus",
+    brandSlug: "asus",
+    brandName: "Razer",
+    rating: 4.7,
+    reviewCount: 455,
+    inStock: true,
+    stock: 24,
+    isFeatured: true,
+    isGaming: true,
+    isNew: true,
+    badge: "new",
+    imageSeed: "rz6",
+    imageUrl: "/assets/images/optimized/products/razer/rz-blackshark.png",
+  }),
+  makeProduct({
+    id: "rz7",
+    name: "Razer Basilisk V3 Pro",
+    slug: "razer-basilisk-v3-pro",
+    shortDescription:
+      "Customizable wireless ergonomic mouse with HyperScroll and extras",
+    description:
+      "Razer Basilisk V3 Pro. Fully customizable ergonomic wireless mouse with HyperScroll tilt wheel, multi-function paddle, and Chroma underglow — ideal for MMO and FPS hybrids.",
+    price: 199.99,
+    compareAtPrice: 219.99,
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
+    brandId: "br-asus",
+    brandSlug: "asus",
+    brandName: "Razer",
+    rating: 4.7,
+    reviewCount: 580,
+    inStock: true,
+    stock: 30,
+    isFeatured: true,
+    isGaming: true,
+    badge: "sale",
+    imageSeed: "rz7",
+    imageUrl: "/assets/images/optimized/products/razer/rz-basilisk.png",
+  }),
+  makeProduct({
+    id: "rz8",
+    name: "Razer Blade 16",
+    slug: "razer-blade-16",
+    shortDescription:
+      "Slim immersive 16\" gaming laptop for gamers and creators",
+    description:
+      "Razer Blade 16 inspired by Razer Canada Blade series. Slim chassis, high-refresh immersive display, discrete GPU performance, and premium aluminum build for gaming and creative work.",
+    price: 3499.99,
+    compareAtPrice: 3699.99,
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
+    brandId: "br-asus",
+    brandSlug: "asus",
+    brandName: "Razer",
+    rating: 4.8,
+    reviewCount: 210,
+    inStock: true,
+    stock: 6,
+    isFeatured: true,
+    isGaming: true,
+    isNew: true,
+    badge: "hot",
+    imageSeed: "rz8",
+    imageUrl: "/assets/images/optimized/products/razer/rz-blade.png",
+  }),
+  makeProduct({
+    id: "rz9",
+    name: "Razer Orochi V2",
+    slug: "razer-orochi-v2",
+    shortDescription:
+      "Ultra-compact dual-mode wireless gaming mouse for on-the-go play",
+    description:
+      "Razer Orochi V2. Pocket-friendly wireless gaming mouse with Bluetooth + HyperSpeed dual mode, long battery life, and mobile-ready precision for travel setups.",
+    price: 79.99,
+    compareAtPrice: 99.99,
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
+    brandId: "br-asus",
+    brandSlug: "asus",
+    brandName: "Razer",
+    rating: 4.5,
+    reviewCount: 990,
+    inStock: true,
+    stock: 48,
+    isFeatured: true,
+    isGaming: true,
+    badge: "sale",
+    imageSeed: "rz9",
+    imageUrl: "/assets/images/optimized/products/razer/rz-orochi.png",
+  }),
+  makeProduct({
+    id: "rz10",
+    name: "Razer Seiren V3 Pro",
+    slug: "razer-seiren-v3-pro",
+    shortDescription:
+      "Studio USB condenser mic with broadcast clarity for streamers",
+    description:
+      "Razer Seiren V3 Pro. Studio-ready streaming microphone with clear condenser pickup, tap-to-mute convenience, and Chroma accents — effortless voice for creators and streamers.",
+    price: 229.99,
+    categoryId: "cat-razer",
+    categorySlug: "razer-products",
+    brandId: "br-asus",
+    brandSlug: "asus",
+    brandName: "Razer",
+    rating: 4.6,
+    reviewCount: 175,
+    inStock: true,
+    stock: 18,
+    isFeatured: true,
+    isGaming: true,
+    isNew: true,
+    badge: "new",
+    imageSeed: "rz10",
+    imageUrl: "/assets/images/optimized/products/razer/rz-seiren.png",
+  }),
   makeProduct({ id: "p1", name: "ProBook Ultra 15", slug: "probook-ultra-15", shortDescription: "15\" performance laptop with RTX graphics", description: "A premium 15-inch laptop built for creators and gamers. Features latest-gen processor, dedicated graphics, and an immersive display.", price: 1299, compareAtPrice: 1499, categoryId: "cat-laptops", categorySlug: "laptops", brandId: "br-asus", brandSlug: "asus", brandName: "Asus", rating: 4.7, reviewCount: 128, inStock: true, stock: 24, isFeatured: true, isBestSeller: true, badge: "sale", imageSeed: "probook" }),
   makeProduct({ id: "p2", name: "Velocity RTX 4070", slug: "velocity-rtx-4070", shortDescription: "High-end graphics card for 4K gaming", description: "Experience next-level gaming with ray tracing and DLSS support. Efficient cooling and premium build quality.", price: 599, compareAtPrice: 699, categoryId: "cat-gpu", categorySlug: "graphic-cards", brandId: "br-nvidia", brandSlug: "nvidia", brandName: "NVIDIA", rating: 4.9, reviewCount: 256, inStock: true, stock: 12, isFeatured: true, isGaming: true, badge: "hot", imageSeed: "rtx4070" }),
   makeProduct({ id: "p3", name: "CoreFlow i7 Processor", slug: "coreflow-i7", shortDescription: "12-core desktop processor", description: "Unlocked performance for gaming, streaming, and content creation with intelligent boost technology.", price: 389, categoryId: "cat-cpu", categorySlug: "processors", brandId: "br-amd", brandSlug: "amd", brandName: "AMD", rating: 4.6, reviewCount: 89, inStock: true, stock: 30, isNew: true, badge: "new", imageSeed: "i7cpu" }),
-  makeProduct({ id: "p4", name: "Spectra RGB Gaming Keyboard", slug: "spectra-rgb-gaming-keyboard", shortDescription: "Full-size RGB mechanical keyboard", description: "Responsive switches, customizable RGB, and durable frame for competitive play.", price: 89, compareAtPrice: 119, categoryId: "cat-gaming-accessories", categorySlug: "gaming-accessories", brandId: "br-dell", brandSlug: "dell", brandName: "Dell", rating: 4.5, reviewCount: 67, inStock: true, stock: 18, isFeatured: true, imageSeed: "monitor32" }),
+  makeProduct({ id: "p4", name: "Spectra RGB Gaming Keyboard", slug: "spectra-rgb-gaming-keyboard", shortDescription: "Full-size RGB mechanical keyboard", description: "Responsive switches, customizable RGB, and durable frame for competitive play.", price: 89, compareAtPrice: 119, categoryId: "cat-keyboards", categorySlug: "keyboards", brandId: "br-dell", brandSlug: "dell", brandName: "Dell", rating: 4.5, reviewCount: 67, inStock: true, stock: 18, isFeatured: true, imageSeed: "mechkb" }),
   makeProduct({ id: "p5", name: "MechStrike RGB Keyboard", slug: "mechstrike-rgb", shortDescription: "Hot-swappable mechanical keyboard", description: "Tactile switches, per-key RGB lighting, and aircraft-grade aluminum frame for serious gamers.", price: 129, categoryId: "cat-keyboards", categorySlug: "keyboards", brandId: "br-msi", brandSlug: "msi", brandName: "MSI", rating: 4.8, reviewCount: 312, inStock: true, stock: 45, isGaming: true, isBestSeller: true, imageSeed: "mechkb" }),
   makeProduct({ id: "p6", name: "Pulse Wireless Mouse", slug: "pulse-wireless", shortDescription: "Ultra-light wireless gaming mouse", description: "26K DPI sensor, 70-hour battery, and ergonomic design for marathon gaming sessions.", price: 79, compareAtPrice: 99, categoryId: "cat-mouse", categorySlug: "mouse", brandId: "br-asus", brandSlug: "asus", brandName: "Asus", rating: 4.7, reviewCount: 198, inStock: true, stock: 60, isGaming: true, badge: "sale", imageSeed: "mouse" }),
   makeProduct({ id: "p7", name: "Titan Gaming Desktop", slug: "titan-gaming-desktop", shortDescription: "Pre-built RTX gaming tower", description: "Ready-to-play desktop with liquid cooling, tempered glass, and customizable RGB lighting.", price: 1899, categoryId: "cat-gaming-pcs", categorySlug: "gaming-pcs", brandId: "br-msi", brandSlug: "msi", brandName: "MSI", rating: 4.8, reviewCount: 54, inStock: true, stock: 8, isFeatured: true, isGaming: true, imageSeed: "desktop" }),
@@ -2247,10 +2501,10 @@ export const products: Product[] = [
   makeProduct({ id: "p10", name: "StreamLine X Laptop", slug: "streamline-x", shortDescription: "Thin & light business laptop", description: "All-day battery, fingerprint reader, and premium aluminum chassis for professionals.", price: 999, categoryId: "cat-laptops", categorySlug: "laptops", brandId: "br-lenovo", brandSlug: "lenovo", brandName: "Lenovo", rating: 4.4, reviewCount: 93, inStock: true, stock: 15, isNew: true, badge: "new", imageSeed: "streamline" }),
   makeProduct({ id: "p11", name: "AeroChair Pro", slug: "aerochair-pro", shortDescription: "Ergonomic gaming chair", description: "4D armrests, lumbar support, and breathable mesh for long sessions.", price: 349, compareAtPrice: 429, categoryId: "cat-gaming", categorySlug: "gaming", brandId: "br-acer", brandSlug: "acer", brandName: "Acer", rating: 4.3, reviewCount: 145, inStock: true, stock: 20, isGaming: true, imageSeed: "chair" }),
   makeProduct({ id: "p12", name: "NetLink WiFi 6 Router", slug: "netlink-wifi6", shortDescription: "Tri-band mesh router", description: "Whole-home coverage with advanced QoS and parental controls.", price: 179, categoryId: "cat-networking", categorySlug: "networking", brandId: "br-hp", brandSlug: "hp", brandName: "HP", rating: 4.2, reviewCount: 38, inStock: true, stock: 25, imageSeed: "router" }),
-  makeProduct({ id: "p13", name: "KOORUI G2511X Gaming Mouse", slug: "koorui-g2511x", shortDescription: "Lightweight RGB gaming mouse", description: "High DPI sensor with programmable buttons for FPS games.", price: 41, compareAtPrice: 58, categoryId: "cat-gaming-accessories", categorySlug: "gaming-accessories", brandId: "br-asus", brandSlug: "asus", brandName: "KOORUI", rating: 4.5, reviewCount: 42, inStock: true, stock: 30, isNew: true, imageSeed: "mon1" }),
-  makeProduct({ id: "p14", name: "LG UltraGear Pro Headset", slug: "lg-ultragear-pro-headset", shortDescription: "Surround gaming headset", description: "Immersive audio and clear mic for competitive sessions.", price: 64, categoryId: "cat-gaming-accessories", categorySlug: "gaming-accessories", brandId: "br-dell", brandSlug: "dell", brandName: "LG", rating: 4.6, reviewCount: 28, inStock: true, stock: 12, imageSeed: "mon2" }),
-  makeProduct({ id: "p15", name: "Samsung Odyssey Gaming Pad", slug: "samsung-odyssey-gaming-pad", shortDescription: "XXL gaming desk mat", description: "Extended surface with smooth tracking for keyboard and mouse.", price: 28, compareAtPrice: 36, categoryId: "cat-gaming-accessories", categorySlug: "gaming-accessories", brandId: "br-asus", brandSlug: "asus", brandName: "Samsung", rating: 4.4, reviewCount: 65, inStock: false, stock: 0, imageSeed: "mon3" }),
-  makeProduct({ id: "p16", name: "Dell Alienware Wired Controller", slug: "dell-alienware-controller", shortDescription: "PC gaming gamepad", description: "Console-style controls with dual vibration for Windows games.", price: 49, categoryId: "cat-gaming-accessories", categorySlug: "gaming-accessories", brandId: "br-dell", brandSlug: "dell", brandName: "Dell", rating: 4.3, reviewCount: 19, inStock: true, stock: 8, isNew: true, imageSeed: "mon4" }),
+  makeProduct({ id: "p13", name: "KOORUI G2511X Gaming Mouse", slug: "koorui-g2511x", shortDescription: "Lightweight RGB gaming mouse", description: "High DPI sensor with programmable buttons for FPS games.", price: 41, compareAtPrice: 58, categoryId: "cat-mouse", categorySlug: "mouse", brandId: "br-asus", brandSlug: "asus", brandName: "KOORUI", rating: 4.5, reviewCount: 42, inStock: true, stock: 30, isNew: true, imageSeed: "mouse" }),
+  makeProduct({ id: "p14", name: "LG UltraGear Pro Headset", slug: "lg-ultragear-pro-headset", shortDescription: "Surround gaming headset", description: "Immersive audio and clear mic for competitive sessions.", price: 64, categoryId: "cat-accessories", categorySlug: "accessories", brandId: "br-dell", brandSlug: "dell", brandName: "LG", rating: 4.6, reviewCount: 28, inStock: true, stock: 12, imageSeed: "router" }),
+  makeProduct({ id: "p15", name: "Samsung Odyssey Gaming Pad", slug: "samsung-odyssey-gaming-pad", shortDescription: "XXL gaming desk mat", description: "Extended surface with smooth tracking for keyboard and mouse.", price: 28, compareAtPrice: 36, categoryId: "cat-accessories", categorySlug: "accessories", brandId: "br-asus", brandSlug: "asus", brandName: "Samsung", rating: 4.4, reviewCount: 65, inStock: false, stock: 0, imageSeed: "router" }),
+  makeProduct({ id: "p16", name: "Dell Alienware Wired Controller", slug: "dell-alienware-controller", shortDescription: "PC gaming gamepad", description: "Console-style controls with dual vibration for Windows games.", price: 49, categoryId: "cat-gaming", categorySlug: "gaming", brandId: "br-dell", brandSlug: "dell", brandName: "Dell", rating: 4.3, reviewCount: 19, inStock: true, stock: 8, isNew: true, imageSeed: "chair" }),
   makeProduct({ id: "p17", name: "STRYDER Ergonomic Gaming Chair", slug: "stryder-chair", shortDescription: "Premium ergonomic gaming chair", description: "Adjustable lumbar support and breathable mesh.", price: 134, compareAtPrice: 149, categoryId: "cat-gaming", categorySlug: "gaming", brandId: "br-acer", brandSlug: "acer", brandName: "Cougar", rating: 4.5, reviewCount: 88, inStock: true, stock: 15, isNew: true, imageSeed: "chair1" }),
   makeProduct({ id: "p18", name: "Ranger Pro Gaming Chair", slug: "ranger-chair", shortDescription: "Racing style gaming chair", description: "High-density foam with 4D armrests.", price: 98, categoryId: "cat-gaming", categorySlug: "gaming", brandId: "br-msi", brandSlug: "msi", brandName: "Ranger", rating: 4.2, reviewCount: 45, inStock: true, stock: 20, imageSeed: "chair2" }),
   makeProduct({ id: "p19", name: "Elite Mesh Office Chair", slug: "elite-mesh-chair", shortDescription: "Ergonomic mesh back chair", description: "Breathable design for long sessions.", price: 112, compareAtPrice: 125, categoryId: "cat-gaming", categorySlug: "gaming", brandId: "br-hp", brandSlug: "hp", brandName: "Elite", rating: 4.4, reviewCount: 32, inStock: true, stock: 12, badge: "sale", imageSeed: "chair3" }),
@@ -2288,6 +2542,22 @@ export function getProductById(id: string) {
 }
 
 export function getProductsByCategorySlug(slug: string) {
+  if (slug === "gaming-accessories") {
+    return products.filter(
+      (p) =>
+        /^ga\d+$/.test(p.id) &&
+        p.categorySlug === "gaming-accessories" &&
+        (p.images[0]?.url.includes("/products/gaming-accessories/") ?? false),
+    );
+  }
+  if (slug === "peripherals") {
+    return products.filter(
+      (p) =>
+        /^pe\d+$/.test(p.id) &&
+        p.categorySlug === "peripherals" &&
+        (p.images[0]?.url.includes("/products/peripherals/") ?? false),
+    );
+  }
   return products.filter((p) => p.categorySlug === slug);
 }
 
@@ -2297,10 +2567,16 @@ export const desktopProducts = products.filter(
 );
 export const serverProducts = products.filter((p) => p.id.startsWith("sv"));
 export const gamingPcProducts = products.filter((p) => p.id.startsWith("gp"));
-export const gamingAccessoryProducts = products.filter((p) =>
-  p.id.startsWith("ga"),
+export const gamingAccessoryProducts = getProductsByCategorySlug(
+  "gaming-accessories",
 );
-export const peripheralProducts = products.filter((p) => p.id.startsWith("pe"));
+export const peripheralProducts = getProductsByCategorySlug("peripherals");
+export const razerProducts = products.filter(
+  (p) =>
+    /^rz\d+$/.test(p.id) &&
+    p.categorySlug === "razer-products" &&
+    (p.images[0]?.url.includes("/products/razer/") ?? false),
+);
 
 export const featuredProducts = products.filter((p) => p.isFeatured);
 export const featuredProductsHome = products
@@ -2314,13 +2590,21 @@ export const serversHome = products
   .slice(0, 5);
 export const newArrivalsHome = [...products].filter((p) => p.isNew).concat(products).slice(0, 10);
 export const gamingAccessoriesNavHome = products
-  .filter((p) => p.id.startsWith("ga"))
+  .filter(
+    (p) =>
+      /^ga\d+$/.test(p.id) &&
+      p.categorySlug === "gaming-accessories",
+  )
   .slice(0, 6);
 export const gamingAccessoriesHome = products
-  .filter((p) => p.id.startsWith("pe"))
+  .filter(
+    (p) => /^pe\d+$/.test(p.id) && p.categorySlug === "peripherals",
+  )
   .slice(0, 5);
 export const peripheralsHome = products
-  .filter((p) => p.id.startsWith("pe"))
+  .filter(
+    (p) => /^pe\d+$/.test(p.id) && p.categorySlug === "peripherals",
+  )
   .slice(0, 5);
 export const accessoriesHome = products.filter((p) =>
   ["ssd", "networking", "ram", "processors", "mouse", "keyboards"].includes(p.categorySlug),

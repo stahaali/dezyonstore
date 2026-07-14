@@ -11,6 +11,7 @@ const productLinks = [
   { label: "Gaming Pc", href: "/categories/gaming-pcs" },
   { label: "Gaming Accessories", href: "/categories/gaming-accessories" },
   { label: "Peripherals", href: "/categories/peripherals" },
+  { label: "Razer Accessories", href: "/categories/razer-products" },
 ];
 
 const accountLinks = [
@@ -54,7 +55,7 @@ export function SiteFooter() {
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gray-900" strokeWidth={1.75} />
-                <span>hello@dezyonstudio.inc</span>
+                <span>hello@dezyonstore.inc</span>
               </li>
             </ul>
 

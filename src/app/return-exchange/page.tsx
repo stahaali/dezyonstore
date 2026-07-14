@@ -101,7 +101,7 @@ export default function ReturnExchangePage() {
           <List
             items={[
               "We accept warranty claims Monday to Friday during store hours (see Contact page for timings).",
-              "For further assistance, please contact our support team at +1 226-501-0914 or hello@dezyonstudio.inc.",
+              "For further assistance, please contact our support team at +1 226-501-0914 or hello@dezyonstore.inc.",
             ]}
           />
 
@@ -135,7 +135,7 @@ export default function ReturnExchangePage() {
           <SubTitle>Return Process</SubTitle>
           <List
             items={[
-              "Contact our support team at hello@dezyonstudio.inc within 7 days of purchase.",
+              "Contact our support team at hello@dezyonstore.inc within 7 days of purchase.",
               "Provide your order number and proof of purchase.",
               "If the return is approved, you will receive instructions on how to ship the item back.",
               "The customer is responsible for the return shipping cost, unless the item received was incorrect or defective on arrival.",
@@ -205,10 +205,10 @@ export default function ReturnExchangePage() {
               </a>
               , email{" "}
               <a
-                href="mailto:hello@dezyonstudio.inc"
+                href="mailto:hello@dezyonstore.inc"
                 className="font-medium text-[#00498e] hover:underline"
               >
-                hello@dezyonstudio.inc
+                hello@dezyonstore.inc
               </a>
               , or visit our{" "}
               <Link
