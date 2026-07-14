@@ -84,6 +84,7 @@ export default async function CategoryPage({ params }: PageProps) {
             hideBrandCategories={
               slug === "gaming-accessories" ? ["Mouse", "Webcam"] : []
             }
+            hideBrandFilter={slug === "razer-products"}
           />
         )}
       </div>

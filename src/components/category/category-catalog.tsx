@@ -17,6 +17,8 @@ interface CategoryCatalogProps {
   brandAsCategories?: boolean;
   /** Hide these Brand category options (e.g. Gaming Accessories: Mouse, Webcam) */
   hideBrandCategories?: string[];
+  /** Hide Brand filter section (e.g. Razer Accessories — all same brand) */
+  hideBrandFilter?: boolean;
 }
 
 const PERIPHERAL_CATEGORIES = [
@@ -210,6 +212,7 @@ export function CategoryCatalog({
   showTypeFilters = false,
   brandAsCategories = false,
   hideBrandCategories = [],
+  hideBrandFilter = false,
 }: CategoryCatalogProps) {
   const brandFacets = useMemo(() => buildBrandFacets(products), [products]);
   const typeFacets = useMemo(() => buildTypeFacets(products), [products]);
@@ -311,29 +314,31 @@ export function CategoryCatalog({
         )}
       </FilterSection>
 
-      <FilterSection
-        title="Brand"
-        open={open.brand}
-        onToggle={() => setOpen((s) => ({ ...s, brand: !s.brand }))}
-      >
-        <ul className="space-y-2.5">
-          {brandSectionFacets.map((item) => (
-            <li key={item.name}>
-              <label className="flex cursor-pointer items-center gap-2.5 text-sm text-gray-800">
-                <input
-                  type="checkbox"
-                  checked={selectedBrands.includes(item.name)}
-                  onChange={() => toggleBrand(item.name)}
-                  className="h-4 w-4 rounded border-gray-400 accent-gray-900"
-                />
-                <span>
-                  {item.name} ({item.count})
-                </span>
-              </label>
-            </li>
-          ))}
-        </ul>
-      </FilterSection>
+      {hideBrandFilter ? null : (
+        <FilterSection
+          title="Brand"
+          open={open.brand}
+          onToggle={() => setOpen((s) => ({ ...s, brand: !s.brand }))}
+        >
+          <ul className="space-y-2.5">
+            {brandSectionFacets.map((item) => (
+              <li key={item.name}>
+                <label className="flex cursor-pointer items-center gap-2.5 text-sm text-gray-800">
+                  <input
+                    type="checkbox"
+                    checked={selectedBrands.includes(item.name)}
+                    onChange={() => toggleBrand(item.name)}
+                    className="h-4 w-4 rounded border-gray-400 accent-gray-900"
+                  />
+                  <span>
+                    {item.name} ({item.count})
+                  </span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </FilterSection>
+      )}
 
       <FilterSection
         title="Availability"
