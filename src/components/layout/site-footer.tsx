@@ -13,6 +13,7 @@ const productLinks = [
   { label: "Gaming Chair", href: "/categories/gaming-chairs" },
   { label: "Peripherals", href: "/categories/peripherals" },
   { label: "Razer Accessories", href: "/categories/razer-products" },
+  { label: "Pricing", href: "/pricing" },
 ];
 
 const accountLinks = [

@@ -109,4 +109,5 @@ export const secondaryNav = [
   { label: "Gaming Chair", href: "/categories/gaming-chairs", hasDropdown: false },
   { label: "Peripherals", href: "/categories/peripherals", hasDropdown: false },
   { label: "Razer Accessories", href: "/categories/razer-products", hasDropdown: false },
+  { label: "Pricing", href: "/pricing", hasDropdown: false },
 ];

@@ -48,8 +48,82 @@ function buildBrandFacets(products: Product[]): Facet[] {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
+/** Razer.com Category facets — inspired by https://www.razer.com/search/chair */
+export const RAZER_CATEGORIES = [
+  "Chairs",
+  "Gaming Chairs",
+  "Accessories",
+  "PC",
+  "Mice",
+  "Laptop accessories",
+  "PC Accessories",
+] as const;
+
+export type RazerCategory = (typeof RAZER_CATEGORIES)[number];
+
+/** Multi-label categories (Razer search facets can overlap) */
+export function getRazerCategories(product: Product): RazerCategory[] {
+  const t =
+    `${product.name} ${product.slug} ${product.shortDescription}`.toLowerCase();
+  const cats = new Set<RazerCategory>();
+
+  const isChairAccessory =
+    /\b(clio|freyja|caster studs|chair caster|haptic.*cushion|speaker head cushion)\b/.test(
+      t,
+    );
+  const isGamingChair =
+    !isChairAccessory &&
+    (/\b(iskur|enki|fujin|soma)\b/.test(t) ||
+      (/\bchair\b/.test(t) && /\b(gaming|ergonomic|mesh)\b/.test(t)));
+
+  if (isGamingChair) {
+    cats.add("Chairs");
+    cats.add("Gaming Chairs");
+  }
+  if (isChairAccessory) {
+    cats.add("Chairs");
+    cats.add("Accessories");
+  }
+  if (
+    /\b(deathadder|viper|basilisk|orochi|cobra|katar)\b/.test(t) ||
+    (/\b(mouse|mice)\b/.test(t) && !/\bpad\b/.test(t) && !/\bcombo\b/.test(t))
+  ) {
+    cats.add("Mice");
+  }
+  if (/\b(blade|laptop|notebook)\b/.test(t)) {
+    cats.add("PC");
+  }
+  if (
+    /\b(laptop\s*sleeve|laptop\s*bag|laptop\s*stand|laptop\s*dock|usb.?c hub|thunderbolt)\b/.test(
+      t,
+    )
+  ) {
+    cats.add("Laptop accessories");
+  }
+  if (
+    /\b(keyboard|blackwidow|huntsman|ornata|headset|kraken|blackshark|seiren|mic|microphone)\b/.test(
+      t,
+    )
+  ) {
+    cats.add("PC Accessories");
+    cats.add("Accessories");
+  }
+  if (/\b(mouse\s*pad|desk mat)\b/.test(t)) {
+    cats.add("PC Accessories");
+    cats.add("Accessories");
+  }
+
+  return RAZER_CATEGORIES.filter((c) => cats.has(c));
+}
+
 /** Infer storefront type from name/slug — used for Razer / GA category options */
 export function getProductType(product: Product): string {
+  // Prefer Razer facet labels when this is a Razer Accessories product
+  if (product.categorySlug === "razer-products") {
+    const razer = getRazerCategories(product);
+    if (razer.length > 0) return razer[0];
+  }
+
   const t =
     `${product.name} ${product.slug} ${product.shortDescription}`.toLowerCase();
 
@@ -200,7 +274,21 @@ function buildPeripheralCategoryFacets(
   );
 }
 
-function buildTypeFacets(products: Product[]): Facet[] {
+function buildTypeFacets(products: Product[], razerMode = false): Facet[] {
+  if (razerMode) {
+    const map = new Map<string, number>();
+    for (const name of RAZER_CATEGORIES) map.set(name, 0);
+    for (const p of products) {
+      for (const cat of getRazerCategories(p)) {
+        map.set(cat, (map.get(cat) ?? 0) + 1);
+      }
+    }
+    return RAZER_CATEGORIES.map((name) => ({
+      name,
+      count: map.get(name) ?? 0,
+    })).filter((f) => f.count > 0);
+  }
+
   const map = new Map<string, number>();
   for (const p of products) {
     const type = getProductType(p);
@@ -266,7 +354,10 @@ export function CategoryCatalog({
   hideBrandFilter = false,
 }: CategoryCatalogProps) {
   const brandFacets = useMemo(() => buildBrandFacets(products), [products]);
-  const typeFacets = useMemo(() => buildTypeFacets(products), [products]);
+  const typeFacets = useMemo(
+    () => buildTypeFacets(products, showTypeFilters),
+    [products, showTypeFilters],
+  );
   const peripheralFacets = useMemo(
     () => buildPeripheralCategoryFacets(products, hideBrandCategories),
     [products, hideBrandCategories],
@@ -325,11 +416,15 @@ export function CategoryCatalog({
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
-      if (
-        selectedTypes.length > 0 &&
-        !selectedTypes.includes(getProductType(p))
-      ) {
-        return false;
+      if (selectedTypes.length > 0) {
+        if (showTypeFilters) {
+          const cats = getRazerCategories(p);
+          if (!selectedTypes.some((t) => cats.includes(t as RazerCategory))) {
+            return false;
+          }
+        } else if (!selectedTypes.includes(getProductType(p))) {
+          return false;
+        }
       }
       if (
         selectedCategories.length > 0 &&
@@ -359,6 +454,7 @@ export function CategoryCatalog({
     selectedBrands,
     availability,
     brandAsCategories,
+    showTypeFilters,
   ]);
 
   const sidebar = (
