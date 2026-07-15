@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionHeader } from "@/components/home/section-header";
-import { StoreProductCard } from "@/components/product/store-product-card";
+import { ProductSortToolbar } from "@/components/product/product-sort-toolbar";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { products } from "@/data/products";
 import { filterProductsByQuery } from "@/lib/search-products";
@@ -55,10 +55,8 @@ export default async function ProductsPage({
           </Link>
         </div>
       ) : (
-        <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {results.map((p) => (
-            <StoreProductCard key={p.id} product={p} />
-          ))}
+        <div className="mt-6">
+          <ProductSortToolbar products={results} />
         </div>
       )}
     </div>

@@ -3,7 +3,11 @@
 import { useMemo, useState } from "react";
 import { ChevronDown, Minus } from "lucide-react";
 import type { Product } from "@/types";
-import { StoreProductCard } from "@/components/product/store-product-card";
+import {
+  CatalogViewSortBar,
+  type CatalogSortOption,
+} from "@/components/category/catalog-view-sort-bar";
+import { ProductLoadMoreList } from "@/components/product/product-load-more-list";
 import { cn } from "@/lib/utils";
 
 type Facet = { name: string; count: number };
@@ -388,6 +392,8 @@ export function CategoryCatalog({
   }>({ inStock: false, outOfStock: false });
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [sortBy, setSortBy] = useState<CatalogSortOption>("Relevance");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   function toggleType(name: string) {
     setSelectedTypes((prev) =>
@@ -456,6 +462,42 @@ export function CategoryCatalog({
     brandAsCategories,
     showTypeFilters,
   ]);
+
+  const sorted = useMemo(() => {
+    const list = [...filtered];
+    switch (sortBy) {
+      case "Price Low - High":
+        return list.sort((a, b) => a.price - b.price);
+      case "Price High - Low":
+        return list.sort((a, b) => b.price - a.price);
+      case "Popularity":
+        return list.sort((a, b) => b.reviewCount - a.reviewCount);
+      case "A - Z":
+        return list.sort((a, b) => a.name.localeCompare(b.name));
+      case "Z - A":
+        return list.sort((a, b) => b.name.localeCompare(a.name));
+      case "Highest Rated":
+        return list.sort(
+          (a, b) => b.rating - a.rating || b.reviewCount - a.reviewCount,
+        );
+      case "Recently Added":
+        return list.sort((a, b) =>
+          (b.createdAt || "").localeCompare(a.createdAt || ""),
+        );
+      case "Relevance":
+      default:
+        return list;
+    }
+  }, [filtered, sortBy]);
+
+  const toolbar = (
+    <CatalogViewSortBar
+      sortBy={sortBy}
+      onSortChange={setSortBy}
+      viewMode={viewMode}
+      onViewModeChange={setViewMode}
+    />
+  );
 
   const sidebar = (
     <aside className="overflow-hidden rounded-xl border border-gray-200 bg-[#f2f2f2]">
@@ -596,7 +638,8 @@ export function CategoryCatalog({
         </div>
 
         <div className="min-w-0 flex-1">
-          {filtered.length === 0 ? (
+          {toolbar}
+          {sorted.length === 0 ? (
             <div className="rounded-xl border border-gray-200 bg-gray-50 px-6 py-12 text-center">
               <p className="text-base font-semibold text-gray-900">
                 No products match these filters
@@ -613,11 +656,7 @@ export function CategoryCatalog({
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
-              {filtered.map((product) => (
-                <StoreProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            <ProductLoadMoreList products={sorted} viewMode={viewMode} />
           )}
         </div>
       </div>

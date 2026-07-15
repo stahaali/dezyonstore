@@ -88,3 +88,18 @@ select:disabled {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

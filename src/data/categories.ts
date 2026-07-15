@@ -4,7 +4,7 @@ export const categories: Category[] = [
   { id: "cat-laptops", name: "Laptops", slug: "laptops", description: "Portable power for work and play", image: "/assets/images/optimized/products/laptops/1-fit.png", productCount: 11 },
   { id: "cat-desktops", name: "LCDs", slug: "desktop-pcs", description: "LCD / LED monitors and All-in-One displays", image: "/assets/images/optimized/products/desktops/1-fit.png", productCount: 18 },
   { id: "cat-servers", name: "Servers", slug: "servers", description: "Tower, rack, and NAS servers for home & business", image: "/assets/images/optimized/products/servers/9-fit.png", productCount: 10 },
-  { id: "cat-gaming-pcs", name: "Gaming PCs", slug: "gaming-pcs", description: "Prebuilt RTX gaming desktops ready to play", image: "/assets/images/optimized/products/gaming-pcs/alienware-aurora.png", productCount: 10 },
+  { id: "cat-gaming-pcs", name: "Gaming PCs", slug: "gaming-pcs", description: "Prebuilt RTX gaming desktops and gaming storage — Seagate, Western Digital & more", image: "/assets/images/optimized/products/gaming-pcs/alienware-aurora.png", productCount: 14 },
   { id: "cat-gpu", name: "Graphic Cards", slug: "graphic-cards", description: "High-performance GPUs", image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600&q=80", productCount: 24 },
   { id: "cat-cpu", name: "Processors", slug: "processors", description: "Latest gen CPUs", image: "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=600&q=80", productCount: 18 },
   { id: "cat-motherboards", name: "Motherboards", slug: "motherboards", description: "ATX, mATX & ITX boards", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80", productCount: 22 },
