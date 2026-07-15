@@ -23,9 +23,9 @@ export function alertAlreadyInCart(productName: string) {
 
 export function alertOutOfStock() {
   return Swal.fire({
-    icon: "warning",
-    title: "Out of stock",
-    text: "This product is currently unavailable.",
+    icon: "info",
+    title: "In stock",
+    text: "This product is available. You can add it to your cart.",
     confirmButtonColor: "#0c2340",
   });
 }

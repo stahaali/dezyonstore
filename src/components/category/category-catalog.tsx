@@ -374,8 +374,7 @@ export function CategoryCatalog({
     ? peripheralFacets.filter((f) => f.count > 0)
     : typeFacets;
 
-  const inStockCount = products.filter((p) => p.inStock).length;
-  const outStockCount = products.length - inStockCount;
+  const inStockCount = products.length;
 
   const [open, setOpen] = useState({
     category: true,
@@ -388,8 +387,7 @@ export function CategoryCatalog({
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [availability, setAvailability] = useState<{
     inStock: boolean;
-    outOfStock: boolean;
-  }>({ inStock: false, outOfStock: false });
+  }>({ inStock: false });
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [sortBy, setSortBy] = useState<CatalogSortOption>("Relevance");
@@ -417,7 +415,7 @@ export function CategoryCatalog({
     setSelectedTypes([]);
     setSelectedCategories([]);
     setSelectedBrands([]);
-    setAvailability({ inStock: false, outOfStock: false });
+    setAvailability({ inStock: false });
   }
 
   const filtered = useMemo(() => {
@@ -445,12 +443,7 @@ export function CategoryCatalog({
           return false;
         }
       }
-      if (availability.inStock || availability.outOfStock) {
-        if (availability.inStock && availability.outOfStock) {
-          // both checked = no filter
-        } else if (availability.inStock && !p.inStock) return false;
-        else if (availability.outOfStock && p.inStock) return false;
-      }
+      // Availability filter removed Out of Stock — all products are in stock
       return true;
     });
   }, [
@@ -458,7 +451,6 @@ export function CategoryCatalog({
     selectedTypes,
     selectedCategories,
     selectedBrands,
-    availability,
     brandAsCategories,
     showTypeFilters,
   ]);
@@ -592,22 +584,6 @@ export function CategoryCatalog({
                 className="h-4 w-4 rounded border-gray-400 accent-gray-900"
               />
               <span>In Stock ({inStockCount})</span>
-            </label>
-          </li>
-          <li>
-            <label className="flex cursor-pointer items-center gap-2.5 text-sm text-gray-800">
-              <input
-                type="checkbox"
-                checked={availability.outOfStock}
-                onChange={(e) =>
-                  setAvailability((s) => ({
-                    ...s,
-                    outOfStock: e.target.checked,
-                  }))
-                }
-                className="h-4 w-4 rounded border-gray-400 accent-gray-900"
-              />
-              <span>On Order Only ({outStockCount})</span>
             </label>
           </li>
         </ul>

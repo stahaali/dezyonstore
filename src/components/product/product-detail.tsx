@@ -26,6 +26,7 @@ import { alertAddedToCart, alertAlreadyInCart } from "@/lib/cart-alerts";
 import { siteLogo } from "@/data/site-assets";
 import { useHasMounted } from "@/hooks/use-has-mounted";
 import { useRequireLoginForCart } from "@/hooks/use-require-login-for-cart";
+import { ProductReviewsSection } from "@/components/product/product-reviews-section";
 
 type Props = {
   product: Product;
@@ -349,13 +350,8 @@ export function ProductDetailView({ product, categoryName }: Props) {
                 <td className="w-[40%] py-2.5 font-semibold text-gray-600">
                   Availability
                 </td>
-                <td
-                  className={cn(
-                    "py-2.5 font-semibold",
-                    product.inStock ? "text-green-600" : "text-red-600",
-                  )}
-                >
-                  {product.inStock ? "In Stock" : "Out of Stock"}
+                <td className="py-2.5 font-semibold text-green-600">
+                  In Stock
                 </td>
               </tr>
               <tr className="border-b border-gray-200">
@@ -499,19 +495,7 @@ export function ProductDetailView({ product, categoryName }: Props) {
                 ) : null}
               </div>
             ) : (
-              <div className="max-w-2xl">
-                <h2 className="text-lg font-bold text-gray-900">
-                  Customer reviews
-                </h2>
-                <p className="mt-2 text-sm text-gray-500">
-                  {product.reviewCount > 0
-                    ? `Based on ${product.reviewCount} reviews · Average ${product.rating.toFixed(1)} / 5`
-                    : "No reviews yet. Be the first to review this product."}
-                </p>
-                <div className="mt-4 rounded-md border border-dashed border-gray-300 px-4 py-8 text-center text-sm text-gray-500">
-                  Reviews will appear here after customers leave feedback.
-                </div>
-              </div>
+              <ProductReviewsSection product={product} />
             )}
           </div>
         </div>

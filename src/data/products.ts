@@ -20,6 +20,9 @@ function makeProduct(
     : img(partial.imageSeed, partial.name, partial.categorySlug);
   return {
     ...partial,
+    // Always available for purchase — never show Out of Stock
+    inStock: true,
+    stock: partial.stock && partial.stock > 0 ? partial.stock : 10,
     images: [primary],
     specs: partial.specs ?? [
       { label: "Warranty", value: "2 Years" },
