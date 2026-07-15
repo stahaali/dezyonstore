@@ -791,8 +791,8 @@ export const products: Product[] = [
       "Dell PowerEdge 1U Rackmount Server — Dense Rack Form Factor, Dual USB Front I/O, Status LEDs, Enterprise Data Center Ready",
     description:
       "Dell PowerEdge 1U Rackmount Server for data center and rack closet deployments. Slim 1U chassis with rack mounting ears, front status LEDs, dual USB ports and power controls. Built for dense compute, virtualization hosts, and shared infrastructure. Reliable Dell enterprise server platform suited for Canadian businesses scaling rack-mounted workloads.",
-    price: 1599,
-    compareAtPrice: 1899,
+    price: 4349.13,
+    compareAtPrice: 5199,
     categoryId: "cat-servers",
     categorySlug: "servers",
     brandId: "br-dell",

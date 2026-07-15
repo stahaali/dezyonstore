@@ -55,7 +55,7 @@ export function NewsletterSection() {
           Subscribe to our newsletter
         </h2>
         <form
-          className="mx-auto mt-6 flex max-w-xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-center"
+          className="mx-auto mt-6 flex max-w-xl flex-col gap-3 max-[576px]:gap-3.5 sm:flex-row sm:items-stretch sm:justify-center"
           onSubmit={handleSubmit}
         >
           <input
@@ -65,12 +65,12 @@ export function NewsletterSection() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter Your Email Address..."
             disabled={loading}
-            className="h-12 flex-1 rounded-full border-0 bg-white px-6 text-sm text-black outline-none placeholder:text-[#a9a9a9] disabled:opacity-70"
+            className="h-12 w-full flex-1 rounded-full border-0 bg-white px-6 text-sm leading-normal text-black outline-none placeholder:text-[#a9a9a9] disabled:opacity-70 max-[576px]:h-14 max-[576px]:min-h-14 max-[576px]:px-5 max-[576px]:text-base"
           />
           <button
             type="submit"
             disabled={loading}
-            className="h-12 shrink-0 cursor-pointer rounded-full px-8 text-sm font-bold text-black transition-colors hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-70"
+            className="h-12 w-full shrink-0 cursor-pointer rounded-full px-8 text-sm font-bold text-black transition-colors hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-70 max-[576px]:h-14 max-[576px]:min-h-14 max-[576px]:text-base sm:w-auto"
             style={{ backgroundColor: YELLOW }}
           >
             {loading ? "Subscribing..." : "Subscribe"}

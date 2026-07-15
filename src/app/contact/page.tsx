@@ -58,10 +58,10 @@ export default function ContactPage() {
                   strokeWidth={1.75}
                 />
                 <a
-                  href="mailto:hello@dezyonstore.inc"
+                  href="mailto:sales@dezyonstudioinc.store"
                   className="leading-relaxed hover:text-[#00498e]"
                 >
-                  hello@dezyonstore.inc
+                  sales@dezyonstudioinc.store
                 </a>
               </li>
             </ul>
